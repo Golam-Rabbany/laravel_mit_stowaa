@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Subcategory;
 use App\Http\Controllers\SubcategoryController;
@@ -61,4 +62,9 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('/cart', CartController::class);
 
     Route::resource('/checkout', CheckoutController::class);
+
+    Route::resource('/order', OrderController::class);
 });
+
+
+Route::view('test', 'test');

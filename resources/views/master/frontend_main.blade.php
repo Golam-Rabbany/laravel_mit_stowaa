@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -42,6 +41,8 @@
     {{-- font awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.css" integrity="sha512-uHuCigcmv3ByTqBQQEwngXWk7E/NaPYP+CFglpkXPnRQbSubJmEENgh+itRDYbWV0fUZmUz7fD/+JDdeQFD5+A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {{-- tailwindcss --}}
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -56,9 +57,6 @@
             </a>
         </div>
         <!-- backtotop - end -->
-
-
-        
         <!-- header_section - start
         ================================================== -->
         <header class="header_section header-style-no-collapse">
@@ -96,7 +94,7 @@
                     <div class="row align-items-center">
                         <div class="col col-lg-3 col-md-3 col-sm-12">
                             <div class="brand_logo">
-                                <a class="brand_link" href="index.html">
+                                <a class="brand_link" href="{{url('/')}}">
                                     <img src="{{asset('frontend/images/logo/logo_1x.png')}}" srcset="{{asset('frontend/images/logo/logo_2x.png 2x')}}" alt>
                                 </a>
                             </div>
@@ -138,7 +136,7 @@
                                     <li>
                                         <span class="cart_icon">
                                             <i class="icon icon-ShoppingCart"></i>
-                                            <small class="cart_counter">3</small>
+                                            <small class="cart_counter">@if(Session::has('cart')){{count(Session::get('cart'))}}@else 0 @endif</small>
                                         </span>
                                     </li>
                                </ul>
@@ -152,7 +150,7 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col col-md-3">
-                            <div class="allcategories_dropdown">
+                            {{-- <div class="allcategories_dropdown">
                                 <button class="allcategories_btn" type="button" data-bs-toggle="collapse" data-bs-target="#allcategories_collapse" aria-expanded="false" aria-controls="allcategories_collapse">
                                     <svg role="img" xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 24 24" aria-labelledby="statsIconTitle" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" color="#000"> <title id="statsIconTitle">Stats</title> <path d="M6 7L15 7M6 12L18 12M6 17L12 17"/> </svg>
                                     Browse categories
@@ -162,7 +160,7 @@
                                         <ul class="allcategories_list ul_li_block">
                                             <li><a href="shop_grid.html"><i class="icon icon-Starship"></i> New Arrival Products</a></li>
                                             <li><a href="shop_list.html"><i class="icon icon-WorldWide"></i> Most Popular Products</a></li>
-                                            {{-- <li><a href="shop_grid.html"><i class="icon icon-Star"></i> Deals of the day</a></li>
+                                            <li><a href="shop_grid.html"><i class="icon icon-Star"></i> Deals of the day</a></li>
                                             <li><a href="shop_list.html"><i class="icon icon-Phone"></i> Mobile Accessories</a></li>
                                             <li><a href="shop_grid.html"><i class="icon icon-DesktopMonitor"></i> Computer Accessories</a></li>
                                             <li><a href="shop_list.html"><i class="icon icon-Bulb"></i> Consumer Electronics</a></li>
@@ -170,11 +168,11 @@
                                             <li><a href="shop_list.html"><i class="icon icon-Phone"></i> Mobile Accessories</a></li>
                                             <li><a href="shop_grid.html"><i class="icon icon-DesktopMonitor"></i> Computer Accessories</a></li>
                                             <li><a href="shop_list.html"><i class="icon icon-Bulb"></i> Consumer Electronics</a></li>
-                                            <li><a href="shop_grid.html"><i class="icon icon-Car"></i> Automobiles & Motorcycles</a></li> --}}
+                                            <li><a href="shop_grid.html"><i class="icon icon-Car"></i> Automobiles & Motorcycles</a></li>
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="col col-md-6">
@@ -197,7 +195,7 @@
                         <div class="col col-md-3">
                             <ul class="header_icons_group ul_li_right">
                                  <li>
-                                    <a href="#">Jon Doe</a>
+                                    <a href="">Stowaa</a>
                                 </li>
                                 
                                 <li>
@@ -274,7 +272,7 @@
                                 <div class="hotline_wrap">
                                     <div class="footer_hotline">
                                         <div class="item_icon">
-                                            <i class="icofont-headphone-alt"></i>
+                                            <i class="fa-solid fa-circle-question"></i>
                                         </div>
                                         <div class="item_content">
                                             <h4 class="item_title">Have any question?</h4>

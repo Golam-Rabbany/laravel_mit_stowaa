@@ -22,7 +22,7 @@ class CheckoutController extends Controller
             return $data;
         });
 
-        return view('frontend.checkout.index',compact('cart'));
+        return view('frontend.checkout.index',compact('carts'));
     }
 
     public function create()
@@ -32,20 +32,7 @@ class CheckoutController extends Controller
 
     public function store(Request $request)
     {
-        $checkouts = new Checkout();
-        $checkouts->email = Auth::user()->email;
-        $checkouts->name = Auth::user()->name;
-        $checkouts->full_name = $request->full_name;
-        $checkouts->phone = $request->phone;
-        $checkouts->country = $request->country;
-        $checkouts->city = $request->city;
-        $checkouts->street = $request->street;
-        $checkouts->locality = $request->locality;
-        $checkouts->address = $request->address;
-        $checkouts->other = $request->other;
-        $checkouts->delivary_system = $request->payment_method;
-        $checkouts->save();
-        return back();
+        
 
     }
 

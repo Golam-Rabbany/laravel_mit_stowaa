@@ -9,7 +9,7 @@
             ================================================== -->
             <div class="sidebar-menu-wrapper">
                 <div class="cart_sidebar">
-                    <button type="button" class="close_btn"><i class="fal fa-times"></i></button>
+                    <button type="button" class="close_btn"><i class="fas fa-times"></i></button>
                     <ul class="cart_items_list ul_li_block mb_30 clearfix">
                         @php
                             $sub_total = 0;
@@ -60,7 +60,7 @@
 
                     <ul class="btns_group ul_li_block clearfix">
                         <li><a class="btn btn_primary" href="{{route('cart.index')}}">View Cart</a></li>
-                        <li><a class="btn btn_secondary" href="checkout.html">Checkout</a></li>
+                        <li><a class="btn btn_secondary" href="{{route('checkout.index')}}">Checkout</a></li>
                     </ul>
                 </div>
 
@@ -331,8 +331,8 @@
                                     <div class="title_wrap">
                                         <h3 class="area_title">Latest Products</h3>
                                         <div class="carousel_nav">
-                                            <button type="button" class="vs4i_left_arrow"><i class="fal fa-angle-left"></i></button>
-                                            <button type="button" class="vs4i_right_arrow"><i class="fal fa-angle-right"></i></button>
+                                            <button type="button" class="vs4i_left_arrow"><i class="fas fa-angle-left"></i></button>
+                                            <button type="button" class="vs4i_right_arrow"><i class="fas fa-angle-right"></i></button>
                                         </div>
                                     </div>
                                     <div class="vertical_slider_4item" data-slick='{"dots": false}'>

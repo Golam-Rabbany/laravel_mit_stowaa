@@ -5,18 +5,19 @@
     }
 </style>
 @section('frontend')
- <!-- breadcrumb_section - start
-            ================================================== -->
-            <div class="breadcrumb_section">
-                <div class="container">
-                    <ul class="breadcrumb_nav ul_li">
-                        <li><a href="index.html">Home</a></li>
-                        <li>Cart</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- breadcrumb_section - end
-            ================================================== -->
+<section class="w-full bg-slate-200 py-4">
+    <div class="container">
+       <div class="row">
+          <div class="flex">
+            <h3 class="px-2"><a href="{{url('/')}}">Home</a></h3>
+             <i class="fa-solid fa-angle-right px-2"></i>
+             <h3 class="px-2"><a href="">Cart</a></h3>
+
+          </div>
+          
+       </div>
+    </div>
+   </section>
 
             <!-- cart_section - start
             ================================================== -->
@@ -30,7 +31,7 @@
                                     <th>Product</th>
                                     <th class="text-center">Price</th>
                                     <th class="text-center">Quantity</th>
-                                    <th class="text-center">Total</th>
+                                    <th class="text-center">Sub Total</th>
                                     <th class="text-center">Remove</th>
                                 </tr>
                             </thead>
@@ -53,20 +54,24 @@
                                             @csrf()
                                             @method('put')
                                             <div class="quantity_input">
-                                                <button type="button" class="">
-                                                    <i class="fas fa-minus"></i>
-                                                </button>
-                                                 
-                                                <input class="input_number" type="text" name="quantity"  min="1" value="{{$quantity = 1}}" />
-                                               
-                                               
-                                                <button type="button" class="">
-                                                    <i class="fal fa-plus"></i>
-                                                </button>
+                                                <form action="{{route('cart.update',$cart['product_id'])}}" id="form" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="button" class="" name="quantity" onclick="form.submit()">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                    
+                                                    <input class="input_number" type="number" onclick="form.submit()" name="quantity"  min="1" value="{{$cart['quantity']}}" />
+                                                    
+                                                
+                                                    <button type="button" class="">
+                                                        <i class="fal fa-plus"></i>
+                                                    </button>
+                                                </form>
                                             </div>
                                         </form>
                                     </td>
-                                    <td class="text-center"><span class="price_text">${{$subtotal = $quantity*$cart['product']->sale_price}}</span></td>
+                                    <td class="text-center"><span class="price_text">${{$subtotal = $cart['quantity']*$cart['product']->sale_price}}</span></td>
                                     @php
                                         $sub_total = $sub_total + $subtotal;
                                     @endphp
@@ -102,7 +107,7 @@
                             <div class="col col-lg-6">
                                 <ul class="btns_group ul_li_right">
                                     <li><a class="btn border_black" href="#!">Update Cart</a></li>
-                                    <li><a class="btn btn_dark" href="#!">Prceed To Checkout</a></li>
+                                    <li><a class="btn btn_dark" href="{{route('checkout.index')}}">Prceed To Checkout</a></li>
                                 </ul>
                             </div>
                         </div>
