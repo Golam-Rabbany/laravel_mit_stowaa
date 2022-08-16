@@ -49,6 +49,7 @@ require __DIR__.'/auth.php';
 Route::middleware(['auth'])->group(function(){
     
     
+    Route::resource('/frontend', FrontendController::class);
     Route::get('/backend', [FrontendController::class, 'backend'])->name('backend');
         
     Route::resource('/category', CategoryController::class);
@@ -64,7 +65,14 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('/checkout', CheckoutController::class);
 
     Route::resource('/order', OrderController::class);
+    Route::post('/status/update/{id}', [OrderController::class, 'status_update'])->name('order.status.update');
 });
 
 
-Route::view('test', 'test');
+Route::get('details/product/{id}', [FrontendController::class, 'product_details'])->name('product.details');
+
+Route::get('/user_order', [OrderController::class, 'user_order'])->name('user_order');
+
+Route::get('/account', [FrontendController::class, 'account'])->name('account');
+
+Route::get('test', [FrontendController::class, 'test']);

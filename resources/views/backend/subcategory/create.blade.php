@@ -1,6 +1,8 @@
 @extends('master.dashboard_main')
 
 @section('dashboard')
+@can('admin')
+
         @if(session()->has('success'))
         <div class="alert alert-success block mb-2">
             {{ session()->get('success') }}
@@ -38,6 +40,7 @@
         </form>
 
 
-
+    
+@endcan
         
 @endsection

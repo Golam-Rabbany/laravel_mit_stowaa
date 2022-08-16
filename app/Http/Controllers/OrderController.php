@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\Productorder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,19 @@ class OrderController extends Controller
 
     public function index()
     {
-        //
+        $cart = Session::get('cart', []);
+
+        $products = Product::select(['id','product_name','sale_price','product_photo'])
+            ->whereIn('id', array_column($cart, 'product_id'))->get()->keyBy('id');
+
+        $carts= collect($cart)->map(function ($data) use ($products) {
+            $data['product'] = $products[$data['product_id']];
+            return $data;
+        });
+
+        $orders = Order::all();
+
+        return view('backend.order.index',compact('orders','carts'));
     }
 
 
@@ -39,6 +52,10 @@ class OrderController extends Controller
         $checkouts->address = $request->address;
         $checkouts->other = $request->other;
         $checkouts->delivary_system = $request->payment_method;
+        $checkouts->subtotal = $request->subtotal;
+        $checkouts->delivery_charge = $request->delivery_charge;
+        $checkouts->total = $request->total;
+
         $checkouts->save();
 
         foreach(Session::get('cart') as $carts){
@@ -61,13 +78,15 @@ class OrderController extends Controller
 
     public function show($id)
     {
-        //
+        $product_orders = Order::with('product_order')->where('id', $id)->first();
+        return view('backend.order.product_order',compact('product_orders'));
     }
 
 
     public function edit($id)
     {
-        //
+        $order_status = Order::find($id);
+        return view('backend.order.order_status',compact('order_status'));
     }
 
 
@@ -78,6 +97,22 @@ class OrderController extends Controller
 
     public function destroy($id)
     {
-        //
+        $del = Order::find($id);
+        $del->delete();
+        return back();
     }
+
+    public function user_order(){
+        $user_orders =Productorder::where('user_id', Auth::user()->id)->get();
+        return view('frontend.order.user_order',compact('user_orders'));
+    }
+
+
+    public function status_update(Request $request, $id){
+        $order = Order::find($id);
+        $order->order_status = $request->status;
+        $order->save();
+        return back();
+    }
+    
 }

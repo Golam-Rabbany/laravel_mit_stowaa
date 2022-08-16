@@ -17,6 +17,7 @@
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
+    @yield('add_data_table_css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
@@ -24,7 +25,7 @@
     <div class="main-wrapper">
         <div class="header">
 			<div class="header-left">
-				<a href="index-2.html" class="logo">
+				<a href="{{url('/')}}" class="logo">
 					<img src="{{asset('frontend/images/logo/logo_1x.png')}}" width="100"  alt="">
 				</a>
 			</div>
@@ -136,9 +137,12 @@
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
-                        <li class="menu-title">Main</li>
+                        <li class="menu-title">Dashboard</li>
                         <li class="active">
                             <a href="{{route('backend')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                        </li>
+                        <li class="">
+                            <a href="{{route('order.index')}}"><i class="fa-solid fa-bag-shopping"></i> <span>Order</span></a>
                         </li>
                         <li class="submenu">
 							<a href="#"><i class="fa fa-user"></i> <span> Category </span> <span class="menu-arrow"></span></a>
@@ -183,16 +187,18 @@
 
     </div>
     <div class="sidebar-overlay" data-reff=""></div>
-    <script src="{{asset('dashboard/js/jquery-3.2.1.min.js')}}"></script>
-	<script src="{{asset('dashboard/js/popper.minp.js')}}"></script>
     <script src="{{asset('dashboard/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('dashboard/js/jquery-3.2.1.min.js')}}"></script>
+  
+	{{-- <script src="{{asset('dashboard/js/popper.minp.js')}}"></script> --}}
+	<script src="{{asset('dashboard/js/popper.min.js')}}"></script>
     <script src="{{asset('dashboard/js/jquery.slimscroll.js')}}"></script>
     <script src="{{asset('dashboard/js/Chart.bundle.js')}}"></script>
     <script src="{{asset('dashboard/js/chart.js')}}"></script>
     <script src="{{asset('dashboard/js/app.js')}}"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/js/all.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    @yield('add_data_table_js')
 </body>
 
 

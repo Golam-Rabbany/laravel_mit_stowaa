@@ -2,6 +2,8 @@
 
 @section('dashboard')
 
+@can('admin')
+
         @if(session()->has('success'))
         <div class="alert alert-success block mb-2">
             {{ session()->get('success') }}
@@ -102,6 +104,8 @@
                         <button class="btn btn-info px-5 text-lg my-5  ml-3">Submit Product</button>
                     </form>
 
+                        
+@endcan
 @endsection
 
 

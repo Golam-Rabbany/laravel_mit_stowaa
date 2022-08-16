@@ -1,7 +1,8 @@
 @extends('master.dashboard_main')
 
 @section('dashboard')
-    
+    @can('author')
+
 
 <table class="table">
     <thead class="thead-dark">
@@ -31,4 +32,6 @@
       
     </tbody>
   </table>
+        
+  @endcan
 @endsection

@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\Productorder;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
 
 class FrontendController extends Controller
 {
@@ -10,79 +16,58 @@ class FrontendController extends Controller
     public function backend(){
         return view('backend');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show()
     {
-        //
+        return view('frontend.account.account');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
+    }
+
+    public function product_details($id){
+        $single_product = Product::where('id', $id)->firstOrFail();
+        return view('frontend.product.product_details',compact('single_product'));
+    }
+
+    public function account(){
+        $user_order = Productorder::where('user_id', Auth::user()->id)->get();
+        return view('frontend.account.account',compact('user_order'));
+    }
+
+    public function test(){
+        // $permission = Permission::find(2);
+        $role = Role::find(1);
+        $user = User::find(1);
+
+        $user->assignRole($role);
+
     }
 }

@@ -26,6 +26,10 @@ class CreateOrdersTable extends Migration
             $table->string('address')->nullable();
             $table->string('other')->nullable();
             $table->string('delivary_system')->nullable();
+            $table->string('subtotal')->nullable();
+            $table->string('delivery_charge')->nullable();
+            $table->string('order_status')->default(0);
+            $table->string('total')->nullable();
             $table->timestamps();
         });
     }

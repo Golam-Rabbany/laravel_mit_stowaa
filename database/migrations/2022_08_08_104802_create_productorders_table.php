@@ -19,8 +19,11 @@ class CreateProductordersTable extends Migration
             $table->string('product_id');
             $table->string('user_id');
             $table->string('quantity');
-            $table->string('unit_price')->nullable();
+            $table->string('subtotal_price')->nullable();
+            $table->string('delivery_charge')->nullable();
+            $table->string('total_price')->nullable();
             $table->timestamps();
+            
         });
     }
 

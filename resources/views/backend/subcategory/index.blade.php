@@ -1,6 +1,9 @@
 @extends('master.dashboard_main')
 
 @section('dashboard')
+@can('author')
+  
+
 <table class="table">
     <thead class="thead-dark">
         <tr>
@@ -35,4 +38,6 @@
         @endforeach
     </tbody>
   </table>
+
+  @endcan
 @endsection

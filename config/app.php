@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Dhaka',
 
     /*
     |--------------------------------------------------------------------------
@@ -164,6 +164,7 @@ return [
 
 
         Intervention\Image\ImageServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Package Service Providers...
          */

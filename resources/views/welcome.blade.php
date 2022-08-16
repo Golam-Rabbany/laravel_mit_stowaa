@@ -1,6 +1,73 @@
 @extends('master.frontend_main')
 
 @section('frontend')
+@section('header_bottom')
+
+<div class="header_bottom">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col col-md-3">
+                <div class="allcategories_dropdown">
+                    <button class="allcategories_btn" type="button" data-bs-toggle="collapse" data-bs-target="#allcategories_collapse" aria-expanded="false" aria-controls="allcategories_collapse">
+                        <svg role="img" xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 24 24" aria-labelledby="statsIconTitle" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" color="#000"> <title id="statsIconTitle">Stats</title> <path d="M6 7L15 7M6 12L18 12M6 17L12 17"/> </svg>
+                        Browse categories
+                    </button>
+                    <div class="allcategories_collapse" id="allcategories_collapse">
+                        <div class="card card-body">
+                            <ul class="allcategories_list ul_li_block">
+                                <li><a href="shop_grid.html"><i class="icon icon-Starship"></i> New Arrival Products</a></li>
+                                <li><a href="shop_list.html"><i class="icon icon-WorldWide"></i> Most Popular Products</a></li>
+                                <li><a href="shop_grid.html"><i class="icon icon-Star"></i> Deals of the day</a></li>
+                                <li><a href="shop_list.html"><i class="icon icon-Phone"></i> Mobile Accessories</a></li>
+                                <li><a href="shop_grid.html"><i class="icon icon-DesktopMonitor"></i> Computer Accessories</a></li>
+                                <li><a href="shop_list.html"><i class="icon icon-Bulb"></i> Consumer Electronics</a></li>
+                                <li><a href="shop_grid.html"><i class="icon icon-Car"></i> Automobiles & Motorcycles</a></li>
+                                <li><a href="shop_list.html"><i class="icon icon-Phone"></i> Mobile Accessories</a></li>
+                                <li><a href="shop_grid.html"><i class="icon icon-DesktopMonitor"></i> Computer Accessories</a></li>
+                                <li><a href="shop_list.html"><i class="icon icon-Bulb"></i> Consumer Electronics</a></li>
+                                <li><a href="shop_grid.html"><i class="icon icon-Car"></i> Automobiles & Motorcycles</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col col-md-6">
+                <nav class="main_menu navbar navbar-expand-lg">
+                    <div class="main_menu_inner collapse navbar-collapse" id="main_menu_dropdown">
+                        <button type="button" class="offcanvas_close">
+                            <i class="fal fa-times"></i>
+                        </button>
+                        <ul class="main_menu_list ul_li">
+                            <li><a class="nav-link" href="#">Home</a></li>
+                            <li><a class="nav-link" href="#">About us</a></li>
+                            <li><a class="nav-link" href="#">Shop</a></li>
+                            <li><a class="nav-link" href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="offcanvas_overlay"></div>
+            </div>
+            
+
+            <div class="col col-md-3">
+                <ul class="header_icons_group ul_li_right">
+                     <li>
+                        <a href="{{route('account')}}">Stowaa</a>
+                    </li>
+                    
+                    <li>
+                        <a href="{{route('account')}}">
+                            <svg role="img" xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" stroke="#051d43" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title id="personIconTitle">Person</title> <path d="M4,20 C4,17 8,17 10,15 C11,14 8,14 8,9 C8,5.667 9.333,4 12,4 C14.667,4 16,5.667 16,9 C16,14 13,14 14,15 C16,17 20,17 20,20"/> </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    
+@endsection
     <!-- main body - start
         ================================================== -->
         <main>
@@ -329,21 +396,24 @@
                             <div class="product-sidebar">
                                 <div class="widget latest_product_carousel">
                                     <div class="title_wrap">
-                                        <h3 class="area_title">Latest Products</h3>
+                                        <h3 class="area_title">Latest Category</h3>
                                         <div class="carousel_nav">
                                             <button type="button" class="vs4i_left_arrow"><i class="fas fa-angle-left"></i></button>
                                             <button type="button" class="vs4i_right_arrow"><i class="fas fa-angle-right"></i></button>
                                         </div>
                                     </div>
                                     <div class="vertical_slider_4item" data-slick='{"dots": false}'>
+                                        
+                                        @foreach (App\Models\Category::all() as $categorys)
+                                            
                                         <div class="slider_item">
                                             <div class="small_product_layout">
                                                 <a class="item_image" href="shop_details.html">
-                                                    <img src="{{asset('frontend/images/latest_product/latest_product_1.png')}}" alt="image_not_found">
+                                                    <img src="{{asset('uploads/category/'.$categorys->category_photo)}}" alt="image_not_found">
                                                 </a>
                                                 <div class="item_content">
                                                     <h3 class="item_title">
-                                                        <a href="shop_details.html">Product Sample</a>
+                                                        <a href="shop_details.html">{{$categorys->category_name}}</a>
                                                     </h3>
                                                     <ul class="rating_star ul_li">
                                                         <li>
@@ -354,195 +424,12 @@
                                                             <i class="fas fa-star-half-alt"></i>
                                                         </li>
                                                     </ul>
-                                                    <div class="item_price">
-                                                        <span>$690.99</span>
-                                                        <del>$720.00</del>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
-                
-                                        <div class="slider_item">
-                                            <div class="small_product_layout">
-                                                <a class="item_image" href="shop_details.html">
-                                                    <img src="{{asset('frontend/images/latest_product/latest_product_2.png')}}" alt="image_not_found">
-                                                </a>
-                                                <div class="item_content">
-                                                    <h3 class="item_title">
-                                                        <a href="shop_details.html">Product Sample</a>
-                                                    </h3>
-                                                    <ul class="rating_star ul_li">
-                                                        <li>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star-half-alt"></i>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="item_price">
-                                                        <span>$690.99</span>
-                                                        <del>$720.00</del>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                
-                                        <div class="slider_item">
-                                            <div class="small_product_layout">
-                                                <a class="item_image" href="shop_details.html">
-                                                    <img src="{{asset('frontend/images/latest_product/latest_product_3.png')}}" alt="image_not_found">
-                                                </a>
-                                                <div class="item_content">
-                                                    <h3 class="item_title">
-                                                        <a href="shop_details.html">Product Sample</a>
-                                                    </h3>
-                                                    <ul class="rating_star ul_li">
-                                                        <li>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star-half-alt"></i>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="item_price">
-                                                        <span>$690.99</span>
-                                                        <del>$720.00</del>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                
-                                        <div class="slider_item">
-                                            <div class="small_product_layout">
-                                                <a class="item_image" href="shop_details.html">
-                                                    <img src="{{asset('frontend/images/latest_product/latest_product_4.png')}}" alt="image_not_found">
-                                                </a>
-                                                <div class="item_content">
-                                                    <h3 class="item_title">
-                                                        <a href="shop_details.html">Product Sample</a>
-                                                    </h3>
-                                                    <ul class="rating_star ul_li">
-                                                        <li>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star-half-alt"></i>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="item_price">
-                                                        <span>$690.99</span>
-                                                        <del>$720.00</del>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                
-                                        <div class="slider_item">
-                                            <div class="small_product_layout">
-                                                <a class="item_image" href="shop_details.html">
-                                                    <img src="{{asset('frontend/images/latest_product/latest_product_1.png')}}" alt="image_not_found">
-                                                </a>
-                                                <div class="item_content">
-                                                    <h3 class="item_title">
-                                                        <a href="shop_details.html">Product Sample</a>
-                                                    </h3>
-                                                    <ul class="rating_star ul_li">
-                                                        <li>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star-half-alt"></i>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="item_price">
-                                                        <span>$690.99</span>
-                                                        <del>$720.00</del>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                
-                                        <div class="slider_item">
-                                            <div class="small_product_layout">
-                                                <a class="item_image" href="shop_details.html">
-                                                    <img src="{{asset('frontend/images/latest_product/latest_product_2.png')}}" alt="image_not_found">
-                                                </a>
-                                                <div class="item_content">
-                                                    <h3 class="item_title">
-                                                        <a href="shop_details.html">Product Sample</a>
-                                                    </h3>
-                                                    <ul class="rating_star ul_li">
-                                                        <li>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star-half-alt"></i>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="item_price">
-                                                        <span>$690.99</span>
-                                                        <del>$720.00</del>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                
-                                        <div class="slider_item">
-                                            <div class="small_product_layout">
-                                                <a class="item_image" href="shop_details.html">
-                                                    <img src="{{asset('frontend/images/latest_product/latest_product_3.png')}}" alt="image_not_found">
-                                                </a>
-                                                <div class="item_content">
-                                                    <h3 class="item_title">
-                                                        <a href="shop_details.html">Product Sample</a>
-                                                    </h3>
-                                                    <ul class="rating_star ul_li">
-                                                        <li>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star-half-alt"></i>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="item_price">
-                                                        <span>$690.99</span>
-                                                        <del>$720.00</del>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                
-                                        <div class="slider_item">
-                                            <div class="small_product_layout">
-                                                <a class="item_image" href="shop_details.html">
-                                                    <img src="{{asset('frontend/images/latest_product/latest_product_4.png')}}" alt="image_not_found">
-                                                </a>
-                                                <div class="item_content">
-                                                    <h3 class="item_title">
-                                                        <a href="shop_details.html">Product Sample</a>
-                                                    </h3>
-                                                    <ul class="rating_star ul_li">
-                                                        <li>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star-half-alt"></i>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="item_price">
-                                                        <span>$690.99</span>
-                                                        <del>$720.00</del>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
+                                        
                                     </div>
                                 </div>
                                 <div class="widget product-add">
@@ -571,7 +458,7 @@
                             </div>
                         </div>
                         <div class="col-lg-9 ">
-                            <div class="best-selling-products">
+                            <div class="best-selling-products mb-4">
                                 <div class="sec-title-link">
                                     <h3>Best selling</h3>
                                     <div class="view-all"><a href="#">View all<i class="fa fa-long-arrow-right"></i></a></div>
@@ -579,27 +466,27 @@
                                 <div class="product-area clearfix">
 
                                     <div class="row py-2">
-                                        @foreach (App\Models\Product::all() as $products)
-                                        <div class="col-lg-4 ">
+                                        @foreach (App\Models\Product::take(6)->get() as $products)
+                                        <div class="col-lg-4 " style="margin-bottom: 3rem">
                                             <div class="p-3 " style="background-color: #fff;border:1px solid #e5e8ec">
                                                 <div class="product-pic">
-                                                    <img src="{{asset('uploads/product/'.$products->product_photo)}}" width="220" alt>
+                                                    <img style="height: 170px!important" src="{{asset('uploads/product/'.$products->product_photo)}}" width="220" alt>
                                                     <div class="actions">
                                                         <ul>
                                                             <li>
-                                                                <a href="#"><svg role="img" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24"  stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Favourite</title> <path d="M12,21 L10.55,19.7051771 C5.4,15.1242507 2,12.1029973 2,8.39509537 C2,5.37384196 4.42,3 7.5,3 C9.24,3 10.91,3.79455041 12,5.05013624 C13.09,3.79455041 14.76,3 16.5,3 C19.58,3 22,5.37384196 22,8.39509537 C22,12.1029973 18.6,15.1242507 13.45,19.7149864 L12,21 Z"/> </svg></a>
+                                                                <a href="#" class="d-flex justify-center items-center"><svg role="img" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24"  stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Favourite</title> <path d="M12,21 L10.55,19.7051771 C5.4,15.1242507 2,12.1029973 2,8.39509537 C2,5.37384196 4.42,3 7.5,3 C9.24,3 10.91,3.79455041 12,5.05013624 C13.09,3.79455041 14.76,3 16.5,3 C19.58,3 22,5.37384196 22,8.39509537 C22,12.1029973 18.6,15.1242507 13.45,19.7149864 L12,21 Z"/> </svg></a>
                                                             </li>
                                                             <li>
-                                                                <a href="#"><svg role="img" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24"  stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Shuffle</title> <path d="M21 16.0399H17.7707C15.8164 16.0399 13.9845 14.9697 12.8611 13.1716L10.7973 9.86831C9.67384 8.07022 7.84196 7 5.88762 7L3 7"/> <path d="M21 7H17.7707C15.8164 7 13.9845 8.18388 12.8611 10.1729L10.7973 13.8271C9.67384 15.8161 7.84196 17 5.88762 17L3 17"/> <path d="M19 4L22 7L19 10"/> <path d="M19 13L22 16L19 19"/> </svg></a>
+                                                                <a href="#" class="d-flex justify-center items-center"><svg role="img" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24"  stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Shuffle</title> <path d="M21 16.0399H17.7707C15.8164 16.0399 13.9845 14.9697 12.8611 13.1716L10.7973 9.86831C9.67384 8.07022 7.84196 7 5.88762 7L3 7"/> <path d="M21 7H17.7707C15.8164 7 13.9845 8.18388 12.8611 10.1729L10.7973 13.8271C9.67384 15.8161 7.84196 17 5.88762 17L3 17"/> <path d="M19 4L22 7L19 10"/> <path d="M19 13L22 16L19 19"/> </svg></a>
                                                             </li>
                                                             <li>
-                                                                <a class="quickview_btn" data-bs-toggle="modal" href="#quickview_popup" role="button" tabindex="0"><svg width="48px" height="48px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Visible (eye)</title> <path d="M22 12C22 12 19 18 12 18C5 18 2 12 2 12C2 12 5 6 12 6C19 6 22 12 22 12Z"/> <circle cx="12" cy="12" r="3"/> </svg></a>
+                                                                <a class="d-flex justify-center items-center" data-bs-toggle="modal" href="#quickview_popup" role="button" tabindex="0"><svg width="48px" height="48px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Visible (eye)</title> <path d="M22 12C22 12 19 18 12 18C5 18 2 12 2 12C2 12 5 6 12 6C19 6 22 12 22 12Z"/> <circle cx="12" cy="12" r="3"/> </svg></a>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                                 <div class="details">
-                                                    <h4><a href="#">{{$products->product_name}}</a></h4>
+                                                    <h4><a href="{{route('product.details',$products->id)}}" target="_blank">{{$products->product_name}}</a></h4>
                                                     <p><a href="#">{{$products->short_desc}}</a></p>
                                                     <div class="rating">
                                                         <i class="fas fa-star"></i>
@@ -612,7 +499,7 @@
                                                         <ins>
                                                             <span class="woocommerce-Price-amount amount">
                                                                 <bdi>
-                                                                    <span class="woocommerce-Price-currencySymbol">$</span>471.48
+                                                                    <span class="woocommerce-Price-currencySymbol">$</span>{{$products->sale_price}}
                                                                 </bdi>
                                                             </span>
                                                         </ins>
@@ -636,98 +523,25 @@
                                 </div>
                             </div>
                             
-                            <div class="top_category_wrap">
+                            <div class="top_category_wrap mt-6">
                                 <div class="sec-title-link">
                                     <h3>Top categories</h3>
                                 </div>
                                 <div class="top_category_carousel2" data-slick='{"dots": false}'>
+                                    @foreach(App\Models\Category::all() as $cate)
+                                    
                                     <div class="slider_item">
                                         <div class="category_boxed">
                                             <a href="#!">
                                                   <span class="item_image">
-                                                      <img src="{{asset('frontend/images/categories/category_1.png')}}" alt="image_not_found">
+                                                      <img src="{{asset('uploads/category/'.$cate->category_photo)}}" alt="image_not_found">
                                                   </span>
-                                                <span class="item_title">Men's Watches</span>
+                                                <span class="item_title">{{$cate->category_name}}</span>
                                             </a>
                                         </div>
                                     </div>
-                
-                                    <div class="slider_item">
-                                        <div class="category_boxed">
-                                            <a href="#!">
-                                                <span class="item_image">
-                                                    <img src="{{asset('frontend/images/categories/category_2.png')}}" alt="image_not_found">
-                                                </span>
-                                                <span class="item_title">iPad</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                
-                                    <div class="slider_item">
-                                        <div class="category_boxed">
-                                            <a href="#!">
-                                                <span class="item_image">
-                                                    <img src="{{asset('frontend/images/categories/category_3.png')}}" alt="image_not_found">
-                                                </span>
-                                                <span class="item_title">iPhone</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                
-                                    <div class="slider_item">
-                                        <div class="category_boxed">
-                                            <a href="#!">
-                                                <span class="item_image">
-                                                    <img src="{{asset('frontend/images/categories/category_4.png')}}" alt="image_not_found">
-                                                </span>
-                                                <span class="item_title">Headphone</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                
-                                    <div class="slider_item">
-                                        <div class="category_boxed">
-                                            <a href="#!">
-                                                <span class="item_image">
-                                                    <img src="{{asset('frontend/images/categories/category_5.png')}}" alt="image_not_found">
-                                                </span>
-                                                <span class="item_title">Mac Mini</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                
-                                    <div class="slider_item">
-                                        <div class="category_boxed">
-                                            <a href="#!">
-                                                <span class="item_image">
-                                                    <img src="{{asset('frontend/images/categories/category_1.png')}}" alt="image_not_found">
-                                                </span>
-                                                <span class="item_title">Men's Watches</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                
-                                    <div class="slider_item">
-                                        <div class="category_boxed">
-                                            <a href="#!">
-                                                <span class="item_image">
-                                                    <img src="{{asset('frontend/images/categories/category_2.png')}}" alt="image_not_found">
-                                                </span>
-                                                <span class="item_title">CCTV  Camera</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                
-                                    <div class="slider_item">
-                                        <div class="category_boxed">
-                                            <a href="#!">
-                                                <span class="item_image">
-                                                    <img src="{{asset('frontend/images/categories/category_3.png')}}" alt="image_not_found">
-                                                </span>
-                                                <span class="item_title">CCTV  Camera</span>
-                                            </a>
-                                        </div>
-                                    </div>
+                                    @endforeach
+
                                 </div>
                                 <div class="carousel_nav carousel-nav-top-right">
                                     <button type="button" class="tc_left_arrow"><i class="fal fa-long-arrow-alt-left"></i></button>
@@ -803,166 +617,54 @@
                         
                         <div class="col col-lg-7">
                             <div class="new-arrivals-grids clearfix">
-                                <div class="grid">
+                                <div class="row">
+                                @foreach(App\Models\Product::take(4)->get() as $prod)
+                                
+                                <div class="col-lg-6 mt-6 p-4">
                                     <div class="product-pic">
-                                        <img src="{{asset('frontend/images/shop/product-img-28.png')}}" alt>
+                                        <img style="height: 180px!important" src="{{asset('uploads/product/'.$prod->product_photo)}}" alt>
                                         <div class="actions">
                                             <ul>
                                                 <li>
-                                                    <a href="#"><svg role="img" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24" stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Favourite</title> <path d="M12,21 L10.55,19.7051771 C5.4,15.1242507 2,12.1029973 2,8.39509537 C2,5.37384196 4.42,3 7.5,3 C9.24,3 10.91,3.79455041 12,5.05013624 C13.09,3.79455041 14.76,3 16.5,3 C19.58,3 22,5.37384196 22,8.39509537 C22,12.1029973 18.6,15.1242507 13.45,19.7149864 L12,21 Z"/> </svg></a>
+                                                    <a href="#" class="d-flex justify-center items-center"><svg role="img" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24" stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Favourite</title> <path d="M12,21 L10.55,19.7051771 C5.4,15.1242507 2,12.1029973 2,8.39509537 C2,5.37384196 4.42,3 7.5,3 C9.24,3 10.91,3.79455041 12,5.05013624 C13.09,3.79455041 14.76,3 16.5,3 C19.58,3 22,5.37384196 22,8.39509537 C22,12.1029973 18.6,15.1242507 13.45,19.7149864 L12,21 Z"/> </svg></a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" class="d-flex justify-center items-center"><svg role="img" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24" stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Shuffle</title> <path d="M21 16.0399H17.7707C15.8164 16.0399 13.9845 14.9697 12.8611 13.1716L10.7973 9.86831C9.67384 8.07022 7.84196 7 5.88762 7L3 7"/> <path d="M21 7H17.7707C15.8164 7 13.9845 8.18388 12.8611 10.1729L10.7973 13.8271C9.67384 15.8161 7.84196 17 5.88762 17L3 17"/> <path d="M19 4L22 7L19 10"/> <path d="M19 13L22 16L19 19"/> </svg></a>
                                                 </li>
                                                 <li>
-                                                    <a href="#"><svg role="img" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24" stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Shuffle</title> <path d="M21 16.0399H17.7707C15.8164 16.0399 13.9845 14.9697 12.8611 13.1716L10.7973 9.86831C9.67384 8.07022 7.84196 7 5.88762 7L3 7"/> <path d="M21 7H17.7707C15.8164 7 13.9845 8.18388 12.8611 10.1729L10.7973 13.8271C9.67384 15.8161 7.84196 17 5.88762 17L3 17"/> <path d="M19 4L22 7L19 10"/> <path d="M19 13L22 16L19 19"/> </svg></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><svg width="48px" height="48px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Visible (eye)</title> <path d="M22 12C22 12 19 18 12 18C5 18 2 12 2 12C2 12 5 6 12 6C19 6 22 12 22 12Z"/> <circle cx="12" cy="12" r="3"/> </svg></a>
+                                                    <a href="#" class="d-flex justify-center items-center"><svg width="48px" height="48px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Visible (eye)</title> <path d="M22 12C22 12 19 18 12 18C5 18 2 12 2 12C2 12 5 6 12 6C19 6 22 12 22 12Z"/> <circle cx="12" cy="12" r="3"/> </svg></a>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="details">
-                                        <h4><a href="#">iPhone 13 pro</a></h4>
-                                        <p><a href="#">A dramatically more powerful camera system a display</a></p>
+                                        <h4><a href="#">{{$prod->product_name}}</a></h4>
+                                        <p><a href="#">{{ \Illuminate\Support\Str::limit($prod->short_desc, 40, $end='...') }}
+                                        </a></p>
                                         <span class="price">
                                             <ins>
                                                 <span class="woocommerce-Price-amount amount">
                                                     <bdi>
-                                                        <span class="woocommerce-Price-currencySymbol">$</span>471.48
+                                                        <span class="woocommerce-Price-currencySymbol">$</span>{{$prod->sale_price}}
                                                     </bdi>
                                                 </span>
                                             </ins>
                                         </span>
+                                        <form action="{{route('cart.store')}}" method="POST" enctype="multipart/form-data">   
+                                                    @csrf 
+                                                    <input type="hidden" name="product_id" value="{{$prod->id}}">
+                                                    <input type="hidden" name="product_name" value="{{$prod->product_name}}">
+                                                    <input type="hidden" name="sale_price" value="{{$prod->sale_price}}">
+                                                    <input type="hidden" name="quantity" value="{{$prod->quantity}}">
                                         <div class="add-cart-area">
                                             <button class="add-to-cart">Add to cart</button>
                                         </div>
+                                    </form>
                                     </div>
                                 </div>
-                                <div class="grid">
-                                    <div class="product-pic">
-                                        <img src="{{asset('frontend/images/shop/product-img-26.png')}}" alt>
-                                        <span class="theme-badge-2">20% off</span>
-                                        <div class="actions">
-                                            <ul>
-                                                <li>
-                                                    <a href="#"><svg role="img" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24" stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Favourite</title> <path d="M12,21 L10.55,19.7051771 C5.4,15.1242507 2,12.1029973 2,8.39509537 C2,5.37384196 4.42,3 7.5,3 C9.24,3 10.91,3.79455041 12,5.05013624 C13.09,3.79455041 14.76,3 16.5,3 C19.58,3 22,5.37384196 22,8.39509537 C22,12.1029973 18.6,15.1242507 13.45,19.7149864 L12,21 Z"/> </svg></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><svg role="img" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24" stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Shuffle</title> <path d="M21 16.0399H17.7707C15.8164 16.0399 13.9845 14.9697 12.8611 13.1716L10.7973 9.86831C9.67384 8.07022 7.84196 7 5.88762 7L3 7"/> <path d="M21 7H17.7707C15.8164 7 13.9845 8.18388 12.8611 10.1729L10.7973 13.8271C9.67384 15.8161 7.84196 17 5.88762 17L3 17"/> <path d="M19 4L22 7L19 10"/> <path d="M19 13L22 16L19 19"/> </svg></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><svg width="48px" height="48px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Visible (eye)</title> <path d="M22 12C22 12 19 18 12 18C5 18 2 12 2 12C2 12 5 6 12 6C19 6 22 12 22 12Z"/> <circle cx="12" cy="12" r="3"/> </svg></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="details">
-                                        <h4><a href="#">Apple</a></h4>
-                                        <p><a href="#">Apple MacBook Pro13.3″ Laptop with Touch bar ID </a></p>
-                                        <span class="price">
-                                            <ins>
-                                                <span class="woocommerce-Price-amount amount">
-                                                    <bdi>
-                                                        <span class="woocommerce-Price-currencySymbol">$</span>471.48
-                                                    </bdi>
-                                                </span>
-                                            </ins>
-                                            <del aria-hidden="true">
-                                                <span class="woocommerce-Price-amount amount">
-                                                    <bdi>
-                                                        <span class="woocommerce-Price-currencySymbol">$</span>904.21
-                                                    </bdi>
-                                                </span>
-                                            </del>
-                                        </span>
-                                        <div class="add-cart-area">
-                                            <button class="add-to-cart">Add to cart</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="grid">
-                                    <div class="product-pic">
-                                        <img src="{{asset('frontend/images/shop/product-img-27.png')}}" alt>
-                                        <span class="theme-badge-2">15% off</span>
-                                        <div class="actions">
-                                            <ul>
-                                                <li>
-                                                    <a href="#"><svg role="img" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24" stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Favourite</title> <path d="M12,21 L10.55,19.7051771 C5.4,15.1242507 2,12.1029973 2,8.39509537 C2,5.37384196 4.42,3 7.5,3 C9.24,3 10.91,3.79455041 12,5.05013624 C13.09,3.79455041 14.76,3 16.5,3 C19.58,3 22,5.37384196 22,8.39509537 C22,12.1029973 18.6,15.1242507 13.45,19.7149864 L12,21 Z"/> </svg></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><svg role="img" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24" stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Shuffle</title> <path d="M21 16.0399H17.7707C15.8164 16.0399 13.9845 14.9697 12.8611 13.1716L10.7973 9.86831C9.67384 8.07022 7.84196 7 5.88762 7L3 7"/> <path d="M21 7H17.7707C15.8164 7 13.9845 8.18388 12.8611 10.1729L10.7973 13.8271C9.67384 15.8161 7.84196 17 5.88762 17L3 17"/> <path d="M19 4L22 7L19 10"/> <path d="M19 13L22 16L19 19"/> </svg></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><svg width="48px" height="48px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Visible (eye)</title> <path d="M22 12C22 12 19 18 12 18C5 18 2 12 2 12C2 12 5 6 12 6C19 6 22 12 22 12Z"/> <circle cx="12" cy="12" r="3"/> </svg></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="details">
-                                        <h4><a href="#">Mac Mini</a></h4>
-                                        <p><a href="#">Apple MacBook Pro13.3″ Laptop with Touch ID </a></p>
-                                        <span class="price">
-                                            <ins>
-                                                <span class="woocommerce-Price-amount amount">
-                                                    <bdi>
-                                                        <span class="woocommerce-Price-currencySymbol">$</span>471.48
-                                                    </bdi>
-                                                </span>
-                                            </ins>
-                                            <del aria-hidden="true">
-                                                <span class="woocommerce-Price-amount amount">
-                                                    <bdi>
-                                                        <span class="woocommerce-Price-currencySymbol">$</span>904.21
-                                                    </bdi>
-                                                </span>
-                                            </del>
-                                        </span>
-                                        <div class="add-cart-area">
-                                            <button class="add-to-cart">Add to cart</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="grid">
-                                    <div class="product-pic">
-                                        <img src="{{asset('frontend/images/shop/product_img_12.png')}}" alt>
-                                        <span class="theme-badge">Sale</span>
-                                        <div class="actions">
-                                            <ul>
-                                                <li>
-                                                    <a href="#"><svg role="img" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24" stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Favourite</title> <path d="M12,21 L10.55,19.7051771 C5.4,15.1242507 2,12.1029973 2,8.39509537 C2,5.37384196 4.42,3 7.5,3 C9.24,3 10.91,3.79455041 12,5.05013624 C13.09,3.79455041 14.76,3 16.5,3 C19.58,3 22,5.37384196 22,8.39509537 C22,12.1029973 18.6,15.1242507 13.45,19.7149864 L12,21 Z"/> </svg></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><svg role="img" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24" stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Shuffle</title> <path d="M21 16.0399H17.7707C15.8164 16.0399 13.9845 14.9697 12.8611 13.1716L10.7973 9.86831C9.67384 8.07022 7.84196 7 5.88762 7L3 7"/> <path d="M21 7H17.7707C15.8164 7 13.9845 8.18388 12.8611 10.1729L10.7973 13.8271C9.67384 15.8161 7.84196 17 5.88762 17L3 17"/> <path d="M19 4L22 7L19 10"/> <path d="M19 13L22 16L19 19"/> </svg></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><svg width="48px" height="48px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title>Visible (eye)</title> <path d="M22 12C22 12 19 18 12 18C5 18 2 12 2 12C2 12 5 6 12 6C19 6 22 12 22 12Z"/> <circle cx="12" cy="12" r="3"/> </svg></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="details">
-                                        <h4><a href="#">Apple</a></h4>
-                                        <p><a href="#">Apple MacBook Pro13.3″ Laptop with Touch ID </a></p>
-                                        <span class="price">
-                                            <ins>
-                                                <span class="woocommerce-Price-amount amount">
-                                                    <bdi>
-                                                        <span class="woocommerce-Price-currencySymbol">$</span>471.48
-                                                    </bdi>
-                                                </span>
-                                            </ins>
-                                            <del aria-hidden="true">
-                                                <span class="woocommerce-Price-amount amount">
-                                                    <bdi>
-                                                        <span class="woocommerce-Price-currencySymbol">$</span>904.21
-                                                    </bdi>
-                                                </span>
-                                            </del>
-                                        </span>
-                                        <div class="add-cart-area">
-                                            <button class="add-to-cart">Add to cart</button>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
+                            </div>
                             </div>
                         </div>
                     </div>

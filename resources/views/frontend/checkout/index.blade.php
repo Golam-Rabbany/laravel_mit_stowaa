@@ -97,6 +97,7 @@
                            <div class="justify-between flex p-2  border-b-2 border-slate-300">
                               <p class="text-base  font-bold">Subtotal</p>
                               <p class="text-base">${{$subtotal}}</p>
+                              <input type="hidden" name="subtotal" value="{{$subtotal}}">
                            </div>
                            <div class="justify-between flex p-2  border-b-2 border-slate-300">
                               <p class="text-base  font-bold">Discount</p>
@@ -105,10 +106,12 @@
                            <div class="justify-between flex p-2  border-b-2 border-slate-300">
                               <p class="text-base  font-bold">Delivery Charge</p>
                               <p  class="text-base">${{$delivery_charge = 50}}</p>
+                              <input type="hidden" name="delivery_charge" value="{{$delivery_charge = 50}}">
                            </div>
                            <div class="justify-between flex p-2  border-b-2 border-slate-300">
                               <p class="text-base  font-bold">Total</p>
-                              <p  class="text-base">${{$subtotal + $delivery_charge}}</p>
+                              <p  class="text-base">${{$total = $subtotal + $delivery_charge}}</p>
+                              <input type="hidden" name="total" value="{{$total = $subtotal + $delivery_charge}}">
                            </div>
                         </div>  
 

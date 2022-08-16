@@ -106,7 +106,7 @@
 
                             <div class="col col-lg-6">
                                 <ul class="btns_group ul_li_right">
-                                    <li><a class="btn border_black" href="#!">Update Cart</a></li>
+                                    {{-- <li><a class="btn border_black" href="#!">Update Cart</a></li> --}}
                                     <li><a class="btn btn_dark" href="{{route('checkout.index')}}">Prceed To Checkout</a></li>
                                 </ul>
                             </div>
@@ -141,7 +141,7 @@
                                     </li>
                                     <li>
                                         <span>Delivery Charge</span>
-                                        <span>${{$delivery_charge = 20}}</span>
+                                        <span>${{$delivery_charge = 50}}</span>
                                     </li>
                                     <li>
                                         <span>Order Total</span>
