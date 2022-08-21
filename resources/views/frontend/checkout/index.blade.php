@@ -19,6 +19,29 @@
          </div>
         </section>
 
+        @if ($error_msg != "")
+           <div class="alert alert-danger">
+            {{$error_msg}}
+           </div>
+        @endif
+
+
+        <section class="w-full bg-slate-200 py-2 mt-4">
+         <div class="container">
+            <div class="mt-4">
+               <form action="#">
+                  <div class="coupon_form form_item">
+                      <input type="text" name="coupon" style="width: 300px" id="apply_coupon_input" placeholder="Coupon Code...">
+                      <button type="button" id="apply_coupon_btn" class="btn btn_dark">Apply Coupon</button>
+                      <div class="info_icon">
+                          <i class="fas fa-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Your Info Here"></i>
+                      </div>
+                  </div>
+              </form>
+            </div>
+         </div>
+        </section>
+
 
         <section class="mt-3">
             <div class="container bg-slate-100 w-full py-3">
@@ -30,7 +53,7 @@
                         <div class="grid grid-cols-1 gap-4 ml-4 md:grid-cols-2">
                            <div class="">
                               <label for="" class="text-sm font-bold">Full Name</label><br>
-                              <input type="text" class="border w-full py-2 mt-1" name="full_name" required>
+                              <input type="text" class="border w-full py-2 mt-1" value="{{old('full_name')}}" name="full_name" required>
                            </div>
                            <div class="">
                               <label for="" class="text-sm font-bold">Phone</label><br>
@@ -113,8 +136,12 @@
                               <input type="hidden" name="subtotal" value="{{$subtotal}}">
                            </div>
                            <div class="justify-between flex p-2  border-b-2 border-slate-300">
-                              <p class="text-base  font-bold">Discount</p>
-                              <p  class="text-base">$00</p>
+                              <p class="text-base  font-bold">Discount (%)</p>
+                              <p  class="text-base">{{$discount_amount}}%</p>
+                           </div>
+                           <div class="justify-between flex p-2  border-b-2 border-slate-300">
+                              <p class="text-base  font-bold">Discount Amount</p>
+                              <p  class="text-base">${{$discount = ($subtotal*$discount_amount)/100}}</p>
                            </div>
                            <div class="justify-between flex p-2  border-b-2 border-slate-300">
                               <p class="text-base  font-bold">Delivery Charge</p>
@@ -123,8 +150,8 @@
                            </div>
                            <div class="justify-between flex p-2  border-b-2 border-slate-300">
                               <p class="text-base  font-bold">Total</p>
-                              <p  class="text-base">${{$total = $subtotal + $delivery_charge}}</p>
-                              <input type="hidden" name="total" value="{{$total = $subtotal + $delivery_charge}}">
+                              <p  class="text-base">${{$total = ($subtotal-$discount) + $delivery_charge}}</p>
+                              <input type="hidden" name="total" value="{{$total}}">
                            </div>
                         </div>  
 
@@ -156,10 +183,24 @@
 
 
         
-         
+
+@endsection
 
 
+@section('frontend_js')
 
 
-
+<script>
+    $(document).ready(function(){
+        $("#apply_coupon_btn").click(function(){
+            var apply_coupon_input = $('#apply_coupon_input').val();
+            
+            var coupon_name = "{{ url('/checkout/coupon') }}/"+apply_coupon_input;
+            
+            window.location.href = coupon_name;
+            // alert(test);
+        })
+    })
+</script>
+    
 @endsection

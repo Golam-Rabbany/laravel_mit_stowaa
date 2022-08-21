@@ -14,7 +14,7 @@
             <option value="2" @if ($order_status->order_status == 2) selected            @endif>Cancel</option>
         </select>
     </div>
-    <button class="btn btn-primary mt-4" style="" type="submit">Submit</button>
+    <button class="btn btn-primary mt-4" style="background:orange; color:white" type="submit">Submit</button>
     </form>
 </section>
 

@@ -19,6 +19,7 @@
     </div>
    </section>
 
+
   
 
             <!-- cart_section - start
@@ -95,16 +96,7 @@
                     <div class="cart_btns_wrap">
                         <div class="row">
                             <div class="col col-lg-6">
-                                <form action="#">
-                                    <div class="coupon_form form_item mb-0">
-                                        <input type="text" name="coupon" value="" id="apply_coupon_input" placeholder="Coupon Code...">
-                                        <button type="button" id="apply_coupon_btn" class="btn btn_dark">Apply Coupon</button>
-                                        <div class="info_icon">
-                                            <i class="fas fa-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Your Info Here"></i>
-                                        </div>
-                                            
-                                    </div>
-                                </form>
+                                
                             </div>
 
                             <div class="col col-lg-6">
@@ -143,20 +135,12 @@
                                         <span>${{$sub_total}}</span>
                                     </li>
                                     <li>
-                                        <span>Discount Amount (%)</span>
-                                        <span>{{$discount_amount}} %</span>
-                                    </li>
-                                    <li>
-                                        <span>Total Discount Amount</span>
-                                        <span>{{$real_amount = ($sub_total * $discount_amount)/100}}</span>
-                                    </li>
-                                    <li>
                                         <span>Delivery Charge</span>
                                         <span>${{$delivery_charge = 50}}</span>
                                     </li>
                                     <li>
-                                        <span>Total Amount</span>
-                                        <span class="total_price">${{($sub_total-$real_amount)+$delivery_charge}}</span>
+                                        <span style="font-weight: bold; font-size:20px">Order Total</span>
+                                        <span class="total_price" style="font-weight: bold; font-size:20px">${{$sub_total+$delivery_charge}}</span>
                                     </li>
                                 </ul>
                             </div>

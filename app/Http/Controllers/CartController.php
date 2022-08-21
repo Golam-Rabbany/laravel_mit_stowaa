@@ -15,37 +15,7 @@ class CartController extends Controller
     {
 
         // ----without coupon this code----
-        
-        $error_msg = "";
-        $discount_amount = 0;
-        if(!Coupon::where('coupon_name', $coupon_name)->exists()){
-            $error_msg = "This coupon does not match";
-        }else{
-            if(Carbon::now()->format('Y-m-d') > Coupon::where('coupon_name', $coupon_name)->first()->validity_till){
-                $error_msg = "Your coupon validity date is expired";
-            }else{
-                // $error_msg = "You have to shop ".Coupon::where('coupon_name', $coupon_name)->first()->minimum_purchage_amount." tk";
-              
-                $subtotal = 0;
-               
-                foreach(Session::get('cart') as $cartSession){
-                    
-                    $subtotal += $cartSession['sale_price'] * $cartSession['quantity'] ;
-                }
 
-                if(Coupon::where('coupon_name', $coupon_name)->first()->minimum_purchage_amount > $subtotal){
-                    return $error_msg = "You have to shop more than ".Coupon::where('coupon_name', $coupon_name)->first()->minimum_purchage_amount." tk";
-                }else{
-                     $discount_amount = Coupon::where('coupon_name', $coupon_name)->first()->discount_amount;
-                    // echo "done";
-                }
-              
-            }
-            
-        }
-
-        // echo $error_msg;
-      
         $cart = Session::get('cart', []);
         $products = Product::select(['id', 'product_name', 'sale_price', 'product_photo'])
             ->whereIn('id', array_column($cart, 'product_id'))->get()->keyBy('id');
@@ -54,23 +24,8 @@ class CartController extends Controller
             $data['product'] = $products[$data['product_id']];
             return $data;
         });
-      return view('frontend.cart.index',compact('carts','discount_amount','error_msg'));
 
-
-
-
-        // ----without coupon this code----
-
-        // $cart = Session::get('cart', []);
-        // $products = Product::select(['id', 'product_name', 'sale_price', 'product_photo'])
-        //     ->whereIn('id', array_column($cart, 'product_id'))->get()->keyBy('id');
-
-        // $carts = collect($cart)->map(function ($data) use ($products) {
-        //     $data['product'] = $products[$data['product_id']];
-        //     return $data;
-        // });
-
-        // return view('frontend.cart.index',compact('carts'));
+        return view('frontend.cart.index',compact('carts'));
 
 
     }
@@ -148,59 +103,7 @@ class CartController extends Controller
     }
 
 
-    public function coupon($coupon_name = ""){
-       
-
-        // $product=[];
-        // foreach(Session::get('cart') as $cartS['quantity']){
-        //     //  $cartS['product_id'];
-        //      $product += $cartS['quantity'];
-        //     // print_r($cartS->product_id);
-        // }
-        // return $product['quantity'];
-
-
-        $error_msg = "";
-        $discount_amount = 0;
-        if(!Coupon::where('coupon_name', $coupon_name)->exists()){
-            $error_msg = "This coupon does not match";
-        }else{
-            if(Carbon::now()->format('Y-m-d') > Coupon::where('coupon_name', $coupon_name)->first()->validity_till){
-                $error_msg = "Your coupon validity date is expired";
-            }else{
-                // $error_msg = "You have to shop ".Coupon::where('coupon_name', $coupon_name)->first()->minimum_purchage_amount." tk";
-              
-                $subtotal = 0;
-               
-                foreach(Session::get('cart') as $cartSession){
-                    
-                    $subtotal += $cartSession['sale_price'] * $cartSession['quantity'] ;
-                }
-
-                if(Coupon::where('coupon_name', $coupon_name)->first()->minimum_purchage_amount > $subtotal){
-                    return $error_msg = "You have to shop more than ".Coupon::where('coupon_name', $coupon_name)->first()->minimum_purchage_amount." tk";
-                }else{
-                     $discount_amount = Coupon::where('coupon_name', $coupon_name)->first()->discount_amount;
-                    // echo "done";
-                }
-              
-            }
-            
-        }
-
-        // echo $error_msg;
-      
-        $cart = Session::get('cart', []);
-        $products = Product::select(['id', 'product_name', 'sale_price', 'product_photo'])
-            ->whereIn('id', array_column($cart, 'product_id'))->get()->keyBy('id');
-
-        $carts = collect($cart)->map(function ($data) use ($products) {
-            $data['product'] = $products[$data['product_id']];
-            return $data;
-        });
-      return view('frontend.cart.index',compact('carts','discount_amount','error_msg'));
-        
-    }
+    
 
 
     

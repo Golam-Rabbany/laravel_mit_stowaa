@@ -48,7 +48,7 @@
                             @if ($order->order_status == 1)
                             <p class="text-primary">Delivary</p><a href="{{route('order.edit',$order->id)}}"><i class="fa fa-edit"></i></a>
                                 @elseif ($order->order_status ==0)
-                                <p class="text-info">Pending</p><a href="{{route('order.edit',$order->id)}}"><i class="fa fa-edit"></i></a>
+                                <p class="text-warning">Pending</p><a href="{{route('order.edit',$order->id)}}"><i class="fa fa-edit"></i></a>
                                 @elseif ($order->order_status == 2)
                                 <div class="text-danger">Cancle</div><a href="{{route('order.edit',$order->id)}}"><i class="fa fa-edit"></i></a>
                             @endif

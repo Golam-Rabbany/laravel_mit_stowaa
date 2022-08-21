@@ -64,6 +64,7 @@ Route::middleware(['auth'])->group(function(){
 
 
     Route::resource('/checkout', CheckoutController::class);
+    Route::get('/checkout/coupon/{coupon_name}', [CheckoutController::class, 'coupon']);
 
     Route::resource('/order', OrderController::class);
     Route::post('/status/update/{id}', [OrderController::class, 'status_update'])->name('order.status.update');
@@ -76,7 +77,7 @@ Route::middleware(['auth'])->group(function(){
 
 Route::resource('/cart', CartController::class);
 
-Route::get('/cart/coupon/{coupon_name}', [CartController::class, 'coupon']);
+// Route::get('/cart/coupon/{coupon_name}', [CartController::class, 'coupon']);
 // Route::get('/cart/{coupon_name}', [CartController::class, 'index']);
 
 
