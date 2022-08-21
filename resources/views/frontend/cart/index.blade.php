@@ -143,12 +143,20 @@
                                         <span>${{$sub_total}}</span>
                                     </li>
                                     <li>
+                                        <span>Discount Amount (%)</span>
+                                        <span>{{$discount_amount}} %</span>
+                                    </li>
+                                    <li>
+                                        <span>Total Discount Amount</span>
+                                        <span>{{$real_amount = ($sub_total * $discount_amount)/100}}</span>
+                                    </li>
+                                    <li>
                                         <span>Delivery Charge</span>
                                         <span>${{$delivery_charge = 50}}</span>
                                     </li>
                                     <li>
-                                        <span>Order Total</span>
-                                        <span class="total_price">${{$sub_total+$delivery_charge}}</span>
+                                        <span>Total Amount</span>
+                                        <span class="total_price">${{($sub_total-$real_amount)+$delivery_charge}}</span>
                                     </li>
                                 </ul>
                             </div>

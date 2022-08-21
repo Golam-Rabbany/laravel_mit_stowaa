@@ -9,6 +9,8 @@
                <div class="flex">
                   <h3 class="px-2"><a href="{{url('/')}}">Home</a></h3>
                   <i class="fa-solid fa-angle-right px-2"></i>
+                  <h3 class="px-2"><a href="{{route('cart.index')}}">Cart</a></h3>
+                  <i class="fa-solid fa-angle-right px-2"></i>
                   <h3 class="px-2"><a href="{{route('checkout.index')}}">Checkout</a></h3>
 
                </div>
