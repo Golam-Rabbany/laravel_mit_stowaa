@@ -40,6 +40,8 @@
     <!-- custom - css include -->
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/style.css')}}">
 
+    @yield('ckeditor')
+    
     {{-- font awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.css" integrity="sha512-uHuCigcmv3ByTqBQQEwngXWk7E/NaPYP+CFglpkXPnRQbSubJmEENgh+itRDYbWV0fUZmUz7fD/+JDdeQFD5+A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -85,7 +87,7 @@
                             </ul>
                         </div>
                         <div class="col col-md-6">
-                            <p class="header_hotline">Call us toll free: <strong>+1888 234 5678</strong></p>
+                            <p class="header_hotline"><strong><a href="{{route('login')}}">Log In</a></strong> | <strong><a href="{{route('register')}}"> Sign Up</a></strong></p>
                         </div>
                     </div>
                 </div>
@@ -279,5 +281,8 @@
     {{-- font awesome --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+
+    @yield('frontend_js')
+    
 </body>
 </html>

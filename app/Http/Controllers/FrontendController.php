@@ -63,11 +63,11 @@ class FrontendController extends Controller
     }
 
     public function test(){
-        // $permission = Permission::find(2);
-        $role = Role::find(1);
-        $user = User::find(1);
+        $permission = Permission::find(2);
+        $role = Role::find(2);
+        // $user = User::find(1);
 
-        $user->assignRole($role);
+        $permission->assignRole($role);
 
     }
 }

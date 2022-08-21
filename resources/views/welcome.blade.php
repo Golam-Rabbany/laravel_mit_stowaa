@@ -15,17 +15,9 @@
                     <div class="allcategories_collapse" id="allcategories_collapse">
                         <div class="card card-body">
                             <ul class="allcategories_list ul_li_block">
-                                <li><a href="shop_grid.html"><i class="icon icon-Starship"></i> New Arrival Products</a></li>
-                                <li><a href="shop_list.html"><i class="icon icon-WorldWide"></i> Most Popular Products</a></li>
-                                <li><a href="shop_grid.html"><i class="icon icon-Star"></i> Deals of the day</a></li>
-                                <li><a href="shop_list.html"><i class="icon icon-Phone"></i> Mobile Accessories</a></li>
-                                <li><a href="shop_grid.html"><i class="icon icon-DesktopMonitor"></i> Computer Accessories</a></li>
-                                <li><a href="shop_list.html"><i class="icon icon-Bulb"></i> Consumer Electronics</a></li>
-                                <li><a href="shop_grid.html"><i class="icon icon-Car"></i> Automobiles & Motorcycles</a></li>
-                                <li><a href="shop_list.html"><i class="icon icon-Phone"></i> Mobile Accessories</a></li>
-                                <li><a href="shop_grid.html"><i class="icon icon-DesktopMonitor"></i> Computer Accessories</a></li>
-                                <li><a href="shop_list.html"><i class="icon icon-Bulb"></i> Consumer Electronics</a></li>
-                                <li><a href="shop_grid.html"><i class="icon icon-Car"></i> Automobiles & Motorcycles</a></li>
+                                @foreach (App\Models\Subcategory::take(11)->get() as $subcategory)
+                                <li><a href="shop_grid.html"><i class="icon icon-Starship"></i> {{$subcategory->subcategory_name}}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -278,42 +270,20 @@
                     <div class="row">
                         <div class="col-lg-9 offset-lg-3">
                             <div class="main_slider" data-slick='{"arrows": false}'>
-                                <div class="slider_item set-bg-image" data-background="{{asset('frontend/images/slider/slide-2.jpg')}}">
+                                @foreach (App\Models\Banner::all() as $banner)
+                                <div class="slider_item set-bg-image" data-background="{{asset('storage/'.$banner->banner_photo)}}">
                                     <div class="slider_content">
                                         <h3 class="small_title" data-animation="fadeInUp2" data-delay=".2s">Clothing</h3>
-                                        <h4 class="big_title" data-animation="fadeInUp2" data-delay=".4s">Smart blood  <span>Pressure monitor</span></h4>
-                                        <p data-animation="fadeInUp2" data-delay=".6s">The best gadgets collection 2021</p>
+                                        <h4 class="big_title" data-animation="fadeInUp2" data-delay=".4s">{{$banner->banner_title}} <span>Pressure monitor</span></h4>
+                                        <p data-animation="fadeInUp2" data-delay=".6s">{{$banner->banner_short_desc}}</p>
                                         <div class="item_price" data-animation="fadeInUp2" data-delay=".6s">
-                                            <del>$430.00</del>
-                                            <span class="sale_price">$350.00</span>
+                                            <del>${{$banner->banner_main_price}}</del>
+                                            <span class="sale_price">${{$banner->banner_sale_price}}</span>
                                         </div>
                                         <a class="btn btn_primary" href="shop_details.html" data-animation="fadeInUp2" data-delay=".8s">Start Buying</a>
                                     </div>
                                 </div>
-                                <div class="slider_item set-bg-image" data-background="{{asset('frontend/images/slider/slide-3.jpg')}}">
-                                    <div class="slider_content">
-                                        <h3 class="small_title" data-animation="fadeInUp2" data-delay=".2s">Clothing</h3>
-                                        <h4 class="big_title" data-animation="fadeInUp2" data-delay=".4s">Smart blood  <span>Pressure monitor</span></h4>
-                                        <p data-animation="fadeInUp2" data-delay=".6s">The best gadgets collection 2021</p>
-                                        <div class="item_price" data-animation="fadeInUp2" data-delay=".6s">
-                                            <del>$430.00</del>
-                                            <span class="sale_price">$350.00</span>
-                                        </div>
-                                        <a class="btn btn_primary" href="shop_details.html" data-animation="fadeInUp2" data-delay=".8s">Start Buying</a>
-                                    </div>
-                                </div>
-                                <div class="slider_item set-bg-image" data-background="{{asset('frontend/images/slider/slide-1.jpg')}}">
-                                    <div class="slider_content">
-                                        <h3 class="small_title" data-animation="fadeInUp2" data-delay=".2s">Clothing</h3>
-                                        <h4 class="big_title" data-animation="fadeInUp2" data-delay=".4s">Smart blood  <span>Pressure monitor</span></h4>
-                                        <p data-animation="fadeInUp2" data-delay=".6s">The best gadgets collection 2021</p>
-                                        <div class="item_price" data-animation="fadeInUp2" data-delay=".6s">
-                                            <del>$430.00</del>
-                                            <span class="sale_price">$350.00</span>
-                                        </div>
-                                        <a class="btn btn_primary" href="shop_details.html" data-animation="fadeInUp2" data-delay=".8s">Start Buying</a>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -639,7 +609,7 @@
                                         </div>
                                     </div>
                                     <div class="details">
-                                        <h4><a href="#">{{$prod->product_name}}</a></h4>
+                                        <h4><a href="{{route('product.details',$products->id)}}" target="_blank">{{$prod->product_name}}</a></h4>
                                         <p><a href="#">{{ \Illuminate\Support\Str::limit($prod->short_desc, 40, $end='...') }}
                                         </a></p>
                                         <span class="price">

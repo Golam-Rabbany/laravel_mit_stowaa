@@ -1,5 +1,7 @@
 @extends('master.dashboard_main')
 
+
+
 @section('dashboard')
 
 @can('admin')
@@ -73,14 +75,14 @@
                         </div>
                         <div class="mt-3 col-lg-12">
                             <label for="label-control">Long Description</label>
-                            <textarea name="long_desc" class="form-control" rows="4"></textarea>
+                            <textarea name="long_desc" class="form-control" id="editor" rows="4"></textarea>
                             @error('long_desc')
                                 <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>
-                        <div class="mt-3 col-lg-12">
+                        <div class="mt-3 col-lg-12" >
                             <label for="label-control">Information</label>
-                            <textarea name="information" class="form-control" rows="4"></textarea>
+                            <textarea name="information" id="editor1" class="form-control" rows="4"></textarea>
                             @error('information')
                                 <small class="text-danger">{{$message}}</small>
                             @enderror
@@ -105,6 +107,18 @@
                     </form>
 
                         
+
+
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+
+<script>
+    CKEDITOR.replace( 'editor' );
+</script>
+<script>
+    CKEDITOR.replace( 'editor1' );
+</script>
+
+
 @endcan
 @endsection
 
@@ -134,3 +148,7 @@
         });
     });
 </script>
+
+
+
+

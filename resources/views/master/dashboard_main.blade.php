@@ -136,6 +136,9 @@
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
+                @can('author')
+                        
+                    
                     <ul>
                         <li class="menu-title">Dashboard</li>
                         <li class="active">
@@ -168,9 +171,17 @@
 								<li><a href="">Edit Product</a></li>
 							</ul>
 						</li>
+                        <li class="submenu">
+							<a href="#"><i class="fa fa-user"></i> <span>Banner </span> <span class="menu-arrow"></span></a>
+							<ul style="display: none;">
+								<li><a href="{{route('banner.create')}}">Banner Create</a></li>
+								<li><a href="{{route('banner.index')}}">Show Banner List</a></li>
+								<li><a href="">Edit Banner</a></li>
+							</ul>
+						</li>
 
- 
                     </ul>
+                    @endcan
                 </div>
             </div>
         </div>

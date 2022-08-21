@@ -69,7 +69,7 @@ class OrderController extends Controller
         }
 
         Session::forget('cart');
-        return back();
+        return redirect()->route('account');
     }else{
         return redirect()->route('login');
     }
@@ -112,7 +112,7 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->order_status = $request->status;
         $order->save();
-        return back();
+        return redirect()->route('order.index');
     }
     
 }

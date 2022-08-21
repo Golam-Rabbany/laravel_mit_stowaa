@@ -77,6 +77,17 @@
                            <label for="" class="text-sm font-bold">Order Notes</label><br>
                            <input type="text" class="border w-full py-2 mt-1" name="other">
                         </div>
+                        <div class="mt-4">
+                           <form action="#">
+                              <div class="coupon_form form_item">
+                                  <input type="text" name="coupon" style="width: 300px" id="apply_coupon_input" placeholder="Coupon Code...">
+                                  <button type="button" id="apply_coupon_btn" class="btn btn_dark">Apply Coupon</button>
+                                  <div class="info_icon">
+                                      <i class="fas fa-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Your Info Here"></i>
+                                  </div>
+                              </div>
+                          </form>
+                        </div>
                      </div>
                      
                      

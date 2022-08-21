@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -60,13 +62,22 @@ Route::middleware(['auth'])->group(function(){
     //category to subcategory
     Route::get('/getSubcategory/{id}', [ProductController::class, 'getSubcategory'])->name('getSubcategory');
 
-    Route::resource('/cart', CartController::class);
 
     Route::resource('/checkout', CheckoutController::class);
 
     Route::resource('/order', OrderController::class);
     Route::post('/status/update/{id}', [OrderController::class, 'status_update'])->name('order.status.update');
+
+    Route::resource('/banner', BannerController::class);
+    Route::get('/banner/download/{id}', [BannerController::class, 'download'])->name('banner.download');
+
+    Route::resource('/coupon', CouponController::class);
 });
+
+Route::resource('/cart', CartController::class);
+
+Route::get('/cart/coupon/{coupon_name}', [CartController::class, 'coupon']);
+// Route::get('/cart/{coupon_name}', [CartController::class, 'index']);
 
 
 Route::get('details/product/{id}', [FrontendController::class, 'product_details'])->name('product.details');

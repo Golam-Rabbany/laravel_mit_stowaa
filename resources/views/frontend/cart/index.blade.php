@@ -19,6 +19,8 @@
     </div>
    </section>
 
+  
+
             <!-- cart_section - start
             ================================================== -->
             <section class="cart_section section_space">
@@ -64,7 +66,7 @@
                                                     <input class="input_number" type="number" onclick="form.submit()" name="quantity"  min="1" value="{{$cart['quantity']}}" />
                                                     
                                                 
-                                                    <button type="button" class="">
+                                                    <button type="button" class="" name="quantity" onclick="form.submit()">
                                                         <i class="fal fa-plus"></i>
                                                     </button>
                                                 </form>
@@ -95,11 +97,12 @@
                             <div class="col col-lg-6">
                                 <form action="#">
                                     <div class="coupon_form form_item mb-0">
-                                        <input type="text" name="coupon" placeholder="Coupon Code...">
-                                        <button type="submit" class="btn btn_dark">Apply Coupon</button>
+                                        <input type="text" name="coupon" value="" id="apply_coupon_input" placeholder="Coupon Code...">
+                                        <button type="button" id="apply_coupon_btn" class="btn btn_dark">Apply Coupon</button>
                                         <div class="info_icon">
                                             <i class="fas fa-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Your Info Here"></i>
                                         </div>
+                                            
                                     </div>
                                 </form>
                             </div>
@@ -156,4 +159,33 @@
             <!-- cart_section - end
             ================================================== -->
 
+@endsection
+
+
+
+@section('frontend_js')
+
+{{-- <script>
+    $(document).ready(function(){
+        alert("apply_coupon_input");
+        $('#apply_coupon_btn').click(function(){
+            var apply_coupon_input = $('$apply_coupon_input').val();
+            alert(apply_coupon_input);
+        });
+    });
+</script> --}}
+
+<script>
+    $(document).ready(function(){
+        $("#apply_coupon_btn").click(function(){
+            var apply_coupon_input = $('#apply_coupon_input').val();
+            
+            var coupon_name = "{{ url('/cart/coupon') }}/"+apply_coupon_input;
+            
+            window.location.href = coupon_name;
+            // alert(test);
+        })
+    })
+</script>
+    
 @endsection
