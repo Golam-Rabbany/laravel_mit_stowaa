@@ -25,20 +25,22 @@ use Spatie\Permission\Contracts\Role;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    $cart = Session::get('cart', []);
-    $products = Product::select(['id', 'product_name', 'sale_price', 'product_photo'])
-        ->whereIn('id', array_column($cart, 'product_id'))->get()->keyBy('id');
-
-    $carts = collect($cart)->map(function ($data) use ($products) {
-        $data['product'] = $products[$data['product_id']];
-        return $data;
-    });
+Route::get('/', [FrontendController::class, 'welcome'])->name('welcome');
 
 
-    return view('welcome',compact('carts'));
-});
+// Route::get('/', function () {
+//     $cart = Session::get('cart', []);
+//     $products = Product::select(['id', 'product_name', 'sale_price', 'product_photo'])
+//         ->whereIn('id', array_column($cart, 'product_id'))->get()->keyBy('id');
+
+//     $carts = collect($cart)->map(function ($data) use ($products) {
+//         $data['product'] = $products[$data['product_id']];
+//         return $data;
+//     });
+
+
+//     return view('welcome',compact('carts'));
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -91,7 +93,7 @@ Route::resource('/cart', CartController::class);
 
 Route::get('details/product/{id}', [FrontendController::class, 'product_details'])->name('product.details');
 
-Route::get('/all/product/', [ProductController::class, 'all_product'])->name('all_product');
+Route::get('/all/product/{id}', [ProductController::class, 'all_product'])->name('all.product');
 
 Route::get('/user_order', [OrderController::class, 'user_order'])->name('user_order');
 

@@ -70,25 +70,14 @@
                               <input type="text" class="border w-full py-2 mt-1" name="phone" required>
                            </div>
                            <div class="">
-                              <label for="" class="text-sm font-bold">Building / House No / Floor / Street</label><br>
+                              <label for="" class="text-sm font-bold"><!---Building / House No / Floor / Street---->Union / Upozela</label><br>
                               <input type="text" class="border w-full py-2 mt-1" name="street">
                            </div>
                            <div class="">
-                              <label for="" class="text-sm font-bold">Colony / Suburb / Locality / Landmark </label><br>
+                              <label for="" class="text-sm font-bold">District</label><br>
                               <input type="text" class="border w-full py-2 mt-1" name="locality">
                            </div>
                            
-                           <div>
-                              <label for="" class="text-sm font-bold">Country</label><br>
-                              <select name="country" class="border w-full" id="" >
-                                 <option value="">-----</option>
-                                 <option value="Bangladesh">Bangladesh</option>
-                                 <option value="Pakisthan">Pakisthan</option>
-                                 <option value="USA">USA</option>
-                                 <option value="Canada">Canada</option>
-                                 <option value="Germany">Germany</option>
-                              </select>
-                           </div>
                            <div>
                               <label for="" class="text-sm font-bold">City</label><br>
                               <select name="city" class="border w-full" id="" >
@@ -103,13 +92,25 @@
                                  <option value="Mymansingh">Mymansingh</option>
                               </select>
                            </div>
+
+                           <div>
+                              <label for="" class="text-sm font-bold">Country</label><br>
+                              <select name="country" class="border w-full" id="" >
+                                 <option value="">-----</option>
+                                 <option value="Bangladesh">Bangladesh</option>
+                                 <option value="Pakisthan">Pakisthan</option>
+                                 <option value="USA">USA</option>
+                                 <option value="Canada">Canada</option>
+                                 <option value="Germany">Germany</option>
+                              </select>
+                           </div>
                         </div>
                         <div class=" ml-4 mt-3">
-                           <label for="" class="text-sm font-bold">Address</label><br>
+                           <label for="" class="text-sm font-bold">Local Address</label><br>
                            <input type="text" class="border w-full py-2 mt-1" name="address">
                         </div>
                         <div class=" ml-4 mt-3">
-                           <label for="" class="text-sm font-bold">Order Notes</label><br>
+                           <label for="" class="text-sm font-bold">Order Notes (if needed)</label><br>
                            <input type="text" class="border w-full py-2 mt-1" name="other">
                         </div>
                         <div class="mt-4">

@@ -189,8 +189,8 @@
                                     <li><a href="about.html">About Us</a></li>
                                     <li><a href="contact.html">Contact Us</a></li>
                                     <li><a href="shop.html">Products</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="register.html">Sign Up</a></li>
+                                    <li><a href="{{route('login')}}">Login</a></li>
+                                    <li><a href="{{route('register')}}">Sign Up</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -199,11 +199,11 @@
                             <div class="footer_widget footer_useful_links">
                                 <h3 class="footer_widget_title text-uppercase">Custom area</h3>
                                 <ul class="ul_li_block">
-                                    <li><a href="#!">My Account</a></li>
+                                    <li><a href="{{route('account')}}">My Account</a></li>
                                     <li><a href="{{route('order.index')}}">Orders</a></li>
                                     <li><a href="#!">Team</a></li>
                                     <li><a href="#!">Privacy Policy</a></li>
-                                    <li><a href="#!">My Cart</a></li>
+                                    <li><a href="{{route('cart.index')}}">My Cart</a></li>
                                 </ul>
                             </div>
                         </div>

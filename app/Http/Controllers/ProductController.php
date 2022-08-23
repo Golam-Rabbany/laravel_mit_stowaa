@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Subcategory;
 use Carbon\Carbon;
@@ -109,7 +110,8 @@ class ProductController extends Controller
    }
 
    public function all_product($id){
-    return view('frontend.product.all_product');
+    $all_data = Category::where('id', $id)->with('category')->first();
+    return view('frontend.product.all_product',compact('all_data'));
    }
 
 

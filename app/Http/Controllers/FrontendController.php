@@ -2,16 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use App\Models\Productorder;
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Productorder;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Spatie\Permission\Models\Permission;
 
 class FrontendController extends Controller
 {
+
+    public function welcome(){
+         $ProductCategorys=Category::with('subcategory')->get();
+
+         $cart = Session::get('cart', []);
+         $products = Product::select(['id', 'product_name', 'sale_price', 'product_photo'])
+             ->whereIn('id', array_column($cart, 'product_id'))->get()->keyBy('id');
+     
+         $carts = collect($cart)->map(function ($data) use ($products) {
+             $data['product'] = $products[$data['product_id']];
+             return $data;
+         });
+     
+
+        return view('welcome',compact('ProductCategorys','carts'));
+    }
 
     public function backend(){
         return view('backend');

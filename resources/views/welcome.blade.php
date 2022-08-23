@@ -8,7 +8,7 @@
         <div class="row align-items-center">
             <div class="col col-md-3">
                 <div class="allcategories_dropdown">
-                    <button class="allcategories_btn" type="button" data-bs-toggle="collapse" data-bs-target="#allcategories_collapse" aria-expanded="false" aria-controls="allcategories_collapse">
+                    <button class="allcategories_btn mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#allcategories_collapse" aria-expanded="false" aria-controls="allcategories_collapse">
                         <svg role="img" xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 24 24" aria-labelledby="statsIconTitle" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" color="#000"> <title id="statsIconTitle">Stats</title> <path d="M6 7L15 7M6 12L18 12M6 17L12 17"/> </svg>
                         Browse categories
                     </button>
@@ -16,7 +16,7 @@
                         <div class="card card-body">
                             <ul class="allcategories_list ul_li_block">
                                 @foreach (App\Models\Category::take(11)->get() as $category)
-                                <li><a href="shop_grid.html"><i class="icon icon-Starship"></i> {{$category->category_name}}</a></li>
+                                <li><a class="text-3xl" href="{{route('all.product',$category->id)}}"><i class="fa-solid fa-caret-right mr-5 text-2xl"></i> {{$category->category_name}}</a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -378,12 +378,12 @@
                                             
                                         <div class="slider_item">
                                             <div class="small_product_layout">
-                                                <a class="item_image" href="shop_details.html">
+                                                <a class="item_image" href="{{route('all.product',$categorys->id)}}">
                                                     <img src="{{asset('uploads/category/'.$categorys->category_photo)}}" alt="image_not_found">
                                                 </a>
                                                 <div class="item_content">
                                                     <h3 class="item_title">
-                                                        <a href="shop_details.html">{{$categorys->category_name}}</a>
+                                                        <a href="{{route('all.product',$categorys->id)}}">{{$categorys->category_name}}</a>
                                                     </h3>
                                                     <ul class="rating_star ul_li">
                                                         <li>
@@ -502,7 +502,7 @@
                                     
                                     <div class="slider_item">
                                         <div class="category_boxed">
-                                            <a href="#!">
+                                            <a href="{{route('all.product',$cate->id)}}">
                                                   <span class="item_image">
                                                       <img src="{{asset('uploads/category/'.$cate->category_photo)}}" alt="image_not_found">
                                                   </span>
@@ -588,7 +588,7 @@
                         <div class="col col-lg-7">
                             <div class="new-arrivals-grids clearfix">
                                 <div class="row">
-                                @foreach(App\Models\Product::take(4)->get() as $prod)
+                                @foreach(App\Models\Product::take(4)->orderBy('id','Desc')->get() as $prod)
                                 
                                 <div class="col-lg-6 mt-6 p-4">
                                     <div class="product-pic">
@@ -692,222 +692,37 @@
                     <div class="sec-title-link mb-0">
                         <h3>Recently Viewed Products</h3>
                     </div>
-                    
-                    <div class="viewed_products_wrap arrows_topright">
-                        <div class="viewed_products_carousel row" data-slick='{"dots": false}'>
-                            <div class="slider_item col">
-                                <div class="viewed_product_item">
-                                    <div class="item_image">
-                                        <img src="{{asset('frontend/images/viewed_products/viewed_product_img_1.png')}}" alt="image_not_found">
-                                    </div>
-                                    <div class="item_content">
-                                        <h3 class="item_title">Electronics</h3>
-                                        <ul class="ul_li_block">
-                                            <li><a href="#!">Computers</a></li>
-                                            <li><a href="#!">Laptop</a></li>
-                                            <li><a href="#!">Macbook</a></li>
-                                            <li><a href="#!">Accessories</a></li>
-                                            <li><a href="#!">More...</a></li>
-                                        </ul>
-                                    </div>
+                       <div class="row">
+
+                        @foreach ($ProductCategorys as $categor)
+                          <div class="col-lg-4">
+                            <div class="viewed_product_item">
+                                <div class="item_image">
+                                    <img style="height: 150px" src="{{asset('uploads/category/'.$categor->category_photo)}}" alt="image_not_found">
                                 </div>
-                                
-                                <div class="viewed_product_item">
-                                    <div class="item_image">
-                                        <img src="{{asset('frontend/images/viewed_products/viewed_product_img_2.png')}}" alt="image_not_found">
-                                    </div>
-                                    <div class="item_content">
-                                        <h3 class="item_title">PC & Laptop</h3>
-                                        <ul class="ul_li_block">
-                                            <li><a href="#!">Computers</a></li>
-                                            <li><a href="#!">Laptop</a></li>
-                                            <li><a href="#!">Macbook</a></li>
-                                            <li><a href="#!">Accessories</a></li>
-                                            <li><a href="#!">More...</a></li>
-                                        </ul>
-                                    </div>
+                                <div class="item_content">
+                                    <h3 class="item_title">{{$categor->category_name??''}}</h3>
+                              
+                                    <ul class="ul_li_block">
+                                        @foreach ( $categor->subcategory as $subs)
+                                        <li><a href="#!">{{ $subs->subcategory_name??''}}</a></li>
+                                        @endforeach
+                                    </ul>
                                 </div>
                             </div>
-                            
-                            <div class="slider_item col">
-                                <div class="viewed_product_item">
-                                    <div class="item_image">
-                                        <img src="{{asset('frontend/images/viewed_products/viewed_product_img_3.png')}}" alt="image_not_found">
-                                    </div>
-                                    <div class="item_content">
-                                        <h3 class="item_title">Tables & Mobiles</h3>
-                                        <ul class="ul_li_block">
-                                            <li><a href="#!">Computers</a></li>
-                                            <li><a href="#!">Laptop</a></li>
-                                            <li><a href="#!">Macbook</a></li>
-                                            <li><a href="#!">Accessories</a></li>
-                                            <li><a href="#!">More...</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="viewed_product_item">
-                                    <div class="item_image">
-                                        <img src="{{asset('frontend/images/viewed_products/viewed_product_img_4.png')}}" alt="image_not_found">
-                                    </div>
-                                    <div class="item_content">
-                                        <h3 class="item_title">Accessories</h3>
-                                        <ul class="ul_li_block">
-                                            <li><a href="#!">Computers</a></li>
-                                            <li><a href="#!">Laptop</a></li>
-                                            <li><a href="#!">Macbook</a></li>
-                                            <li><a href="#!">Accessories</a></li>
-                                            <li><a href="#!">More...</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="slider_item col">
-                                <div class="viewed_product_item">
-                                    <div class="item_image">
-                                        <img src="{{asset('frontend/images/viewed_products/viewed_product_img_5.png')}}" alt="image_not_found">
-                                    </div>
-                                    <div class="item_content">
-                                        <h3 class="item_title">TV & Audio</h3>
-                                        <ul class="ul_li_block">
-                                            <li><a href="#!">Computers</a></li>
-                                            <li><a href="#!">Laptop</a></li>
-                                            <li><a href="#!">Macbook</a></li>
-                                            <li><a href="#!">Accessories</a></li>
-                                            <li><a href="#!">More...</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="viewed_product_item">
-                                    <div class="item_image">
-                                        <img src="{{asset('frontend/images/viewed_products/viewed_product_img_6.png')}}" alt="image_not_found">
-                                    </div>
-                                    <div class="item_content">
-                                        <h3 class="item_title">Games & Consoles</h3>
-                                        <ul class="ul_li_block">
-                                            <li><a href="#!">Computers</a></li>
-                                            <li><a href="#!">Laptop</a></li>
-                                            <li><a href="#!">Macbook</a></li>
-                                            <li><a href="#!">Accessories</a></li>
-                                            <li><a href="#!">More...</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="slider_item col">
-                                <div class="viewed_product_item">
-                                    <div class="item_image">
-                                        <img src="{{asset('frontend/images/viewed_products/viewed_product_img_1.png')}}" alt="image_not_found">
-                                    </div>
-                                    <div class="item_content">
-                                        <h3 class="item_title">Electronics</h3>
-                                        <ul class="ul_li_block">
-                                            <li><a href="#!">Computers</a></li>
-                                            <li><a href="#!">Laptop</a></li>
-                                            <li><a href="#!">Macbook</a></li>
-                                            <li><a href="#!">Accessories</a></li>
-                                            <li><a href="#!">More...</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="viewed_product_item">
-                                    <div class="item_image">
-                                        <img src="{{asset('frontend/images/viewed_products/viewed_product_img_2.png')}}" alt="image_not_found">
-                                    </div>
-                                    <div class="item_content">
-                                        <h3 class="item_title">PC & Laptop</h3>
-                                        <ul class="ul_li_block">
-                                            <li><a href="#!">Computers</a></li>
-                                            <li><a href="#!">Laptop</a></li>
-                                            <li><a href="#!">Macbook</a></li>
-                                            <li><a href="#!">Accessories</a></li>
-                                            <li><a href="#!">More...</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="slider_item col">
-                                <div class="viewed_product_item">
-                                    <div class="item_image">
-                                        <img src="{{asset('frontend/images/viewed_products/viewed_product_img_3.png')}}" alt="image_not_found">
-                                    </div>
-                                    <div class="item_content">
-                                        <h3 class="item_title">Tables & Mobiles</h3>
-                                        <ul class="ul_li_block">
-                                            <li><a href="#!">Computers</a></li>
-                                            <li><a href="#!">Laptop</a></li>
-                                            <li><a href="#!">Macbook</a></li>
-                                            <li><a href="#!">Accessories</a></li>
-                                            <li><a href="#!">More...</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="viewed_product_item">
-                                    <div class="item_image">
-                                        <img src="{{asset('frontend/images/viewed_products/viewed_product_img_4.png')}}" alt="image_not_found">
-                                    </div>
-                                    <div class="item_content">
-                                        <h3 class="item_title">Accessories</h3>
-                                        <ul class="ul_li_block">
-                                            <li><a href="#!">Computers</a></li>
-                                            <li><a href="#!">Laptop</a></li>
-                                            <li><a href="#!">Macbook</a></li>
-                                            <li><a href="#!">Accessories</a></li>
-                                            <li><a href="#!">More...</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="slider_item col">
-                                <div class="viewed_product_item">
-                                    <div class="item_image">
-                                        <img src="{{asset('frontend/images/viewed_products/viewed_product_img_5.png')}}" alt="image_not_found">
-                                    </div>
-                                    <div class="item_content">
-                                        <h3 class="item_title">TV & Audio</h3>
-                                        <ul class="ul_li_block">
-                                            <li><a href="#!">Computers</a></li>
-                                            <li><a href="#!">Laptop</a></li>
-                                            <li><a href="#!">Macbook</a></li>
-                                            <li><a href="#!">Accessories</a></li>
-                                            <li><a href="#!">More...</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="viewed_product_item">
-                                    <div class="item_image">
-                                        <img src="{{asset('frontend/images/viewed_products/viewed_product_img_6.png')}}" alt="image_not_found">
-                                    </div>
-                                    <div class="item_content">
-                                        <h3 class="item_title">Games & Consoles</h3>
-                                        <ul class="ul_li_block">
-                                            <li><a href="#!">Computers</a></li>
-                                            <li><a href="#!">Laptop</a></li>
-                                            <li><a href="#!">Macbook</a></li>
-                                            <li><a href="#!">Accessories</a></li>
-                                            <li><a href="#!">More...</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel_nav">
-                            <button type="button" class="vpc_left_arrow"><i class="fa fa-long-arrow-alt-left"></i></button>
-                            <button type="button" class="vpc_right_arrow"><i class="fa fa-long-arrow-alt-right"></i></button>
-                        </div>
-                    </div>
+                          </div>
+                          @endforeach
+
+                          
+                       </div>
+
+
+               
                 </div>
             </section>
             <!-- viewed_products_section - end
             ================================================== -->
+
             
             <!-- newsletter_section - start
             ================================================== -->
