@@ -105,8 +105,13 @@ class ProductController extends Controller
     }
 
     public function getSubcategory($id){
-      
         return Subcategory::where('category_id',$id)->get();
-
    }
+
+   public function all_product($id){
+    return view('frontend.product.all_product');
+   }
+
+
+
 }

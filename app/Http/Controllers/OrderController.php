@@ -55,6 +55,8 @@ class OrderController extends Controller
         $checkouts->subtotal = $request->subtotal;
         $checkouts->delivery_charge = $request->delivery_charge;
         $checkouts->total = $request->total;
+        $checkouts->discount_amount = $request->discount_amount;
+        $checkouts->discount = $request->discount;
 
         $checkouts->save();
 
@@ -78,7 +80,9 @@ class OrderController extends Controller
 
     public function show($id)
     {
-        $product_orders = Order::with('product_order')->where('id', $id)->first();
+
+
+       $product_orders = Order::with('product_order.product')->where('id', $id)->first();
         return view('backend.order.product_order',compact('product_orders'));
     }
 
@@ -113,6 +117,10 @@ class OrderController extends Controller
         $order->order_status = $request->status;
         $order->save();
         return redirect()->route('order.index');
+    }
+
+    public function invoice(){
+        return view('backend.order.invoice');
     }
     
 }

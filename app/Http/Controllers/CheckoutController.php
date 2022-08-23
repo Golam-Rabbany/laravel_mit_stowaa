@@ -66,7 +66,7 @@ class CheckoutController extends Controller
             return $data;
         });
 
-        return view('frontend.checkout.index',compact('carts','discount_amount','error_msg'));
+        return view('frontend.checkout.index',compact('carts','discount_amount','error_msg', 'coupon_name'));
     }
 
     public function create()
@@ -141,7 +141,7 @@ class CheckoutController extends Controller
             $data['product'] = $products[$data['product_id']];
             return $data;
         });
-        return view('frontend.checkout.index',compact('carts','discount_amount','error_msg'));        
+        return view('frontend.checkout.index',compact('carts','discount_amount','error_msg','coupon_name'));        
     }
 
 

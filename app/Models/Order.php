@@ -12,4 +12,10 @@ class Order extends Model
     public function product_order(){
         return $this->hasMany(Productorder::class, 'order_id', 'id');
     }
+
+
+    
+
+
+
 }

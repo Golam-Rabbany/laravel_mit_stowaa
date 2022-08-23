@@ -13,6 +13,7 @@ use App\Http\Controllers\SubcategoryController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Contracts\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,12 +69,19 @@ Route::middleware(['auth'])->group(function(){
 
     Route::resource('/order', OrderController::class);
     Route::post('/status/update/{id}', [OrderController::class, 'status_update'])->name('order.status.update');
+  
+    Route::get('/invoice/order', [OrderController::class, 'invoice'])->name('order.invoice');
 
     Route::resource('/banner', BannerController::class);
     Route::get('/banner/download/{id}', [BannerController::class, 'download'])->name('banner.download');
 
     Route::resource('/coupon', CouponController::class);
 });
+
+// Route::get('invoices',function(){
+//     return view('backend.order.invoice');
+// });
+
 
 Route::resource('/cart', CartController::class);
 
@@ -82,6 +90,8 @@ Route::resource('/cart', CartController::class);
 
 
 Route::get('details/product/{id}', [FrontendController::class, 'product_details'])->name('product.details');
+
+Route::get('/all/product/', [ProductController::class, 'all_product'])->name('all_product');
 
 Route::get('/user_order', [OrderController::class, 'user_order'])->name('user_order');
 

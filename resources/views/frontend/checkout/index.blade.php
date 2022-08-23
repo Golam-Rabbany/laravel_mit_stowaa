@@ -28,10 +28,12 @@
 
         <section class="w-full bg-slate-200 py-2 mt-4">
          <div class="container">
+            <div class="row d-flex">
+            <div class="col-lg-6">
             <div class="mt-4">
                <form action="#">
                   <div class="coupon_form form_item">
-                      <input type="text" name="coupon" style="width: 300px" id="apply_coupon_input" placeholder="Coupon Code...">
+                      <input type="text" value="{{$coupon_name}}" name="coupon" style="width: 300px" id="apply_coupon_input" placeholder="Coupon Code...">
                       <button type="button" id="apply_coupon_btn" class="btn btn_dark">Apply Coupon</button>
                       <div class="info_icon">
                           <i class="fas fa-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Your Info Here"></i>
@@ -39,6 +41,14 @@
                   </div>
               </form>
             </div>
+            </div>
+            <div class="col-lg-6">
+               @foreach (App\Models\Coupon::all() as $coupon)
+               <button class="badge bg-warning" class="" type="button">{{$coupon->coupon_name}}</button>
+                  
+               @endforeach
+            </div>
+         </div>
          </div>
         </section>
 
@@ -103,7 +113,7 @@
                            <input type="text" class="border w-full py-2 mt-1" name="other">
                         </div>
                         <div class="mt-4">
-                           <form action="#">
+                           {{-- <form action="#">
                               <div class="coupon_form form_item">
                                   <input type="text" name="coupon" style="width: 300px" id="apply_coupon_input" placeholder="Coupon Code...">
                                   <button type="button" id="apply_coupon_btn" class="btn btn_dark">Apply Coupon</button>
@@ -111,7 +121,7 @@
                                       <i class="fas fa-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Your Info Here"></i>
                                   </div>
                               </div>
-                          </form>
+                          </form> --}}
                         </div>
                      </div>
                      
@@ -146,14 +156,19 @@
                            <div class="justify-between flex p-2  border-b-2 border-slate-300">
                               <p class="text-base  font-bold">Delivery Charge</p>
                               <p  class="text-base">${{$delivery_charge = 50}}</p>
-                              <input type="hidden" name="delivery_charge" value="{{$delivery_charge = 50}}">
+                              
                            </div>
                            <div class="justify-between flex p-2  border-b-2 border-slate-300">
                               <p class="text-base  font-bold">Total</p>
                               <p  class="text-base">${{$total = ($subtotal-$discount) + $delivery_charge}}</p>
-                              <input type="hidden" name="total" value="{{$total}}">
+                              
                            </div>
                         </div>  
+
+                        <input type="hidden" name="delivery_charge" value="{{$delivery_charge = 50}}">
+                        <input type="hidden" name="discount_amount" value="{{$discount_amount}}">
+                        <input type="hidden" name="discount" value="{{$discount}}">
+                        <input type="hidden" name="total" value="{{$total}}">
 
                         <div class="mt-16 bg-slate-300 py-4 px-2">
                            <div class="mb-3">

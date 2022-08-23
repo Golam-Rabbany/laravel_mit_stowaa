@@ -15,8 +15,8 @@
                     <div class="allcategories_collapse" id="allcategories_collapse">
                         <div class="card card-body">
                             <ul class="allcategories_list ul_li_block">
-                                @foreach (App\Models\Subcategory::take(11)->get() as $subcategory)
-                                <li><a href="shop_grid.html"><i class="icon icon-Starship"></i> {{$subcategory->subcategory_name}}</a></li>
+                                @foreach (App\Models\Category::take(11)->get() as $category)
+                                <li><a href="shop_grid.html"><i class="icon icon-Starship"></i> {{$category->category_name}}</a></li>
                                 @endforeach
                             </ul>
                         </div>
